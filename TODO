@@ -1,2 +1,6 @@
 - Better date checking
 - Handle non-ASCI (ã) and character references (&#38;)
+	This seems to be a limitation of XML::Parser (or something I don't
+	unserstand about it); if you use the example/iTunesStats.pl script's own
+	parsing code, which builds the library itself, exteneded characters are
+	interpreted just fine.
