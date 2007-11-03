@@ -204,7 +204,12 @@ sub name {
 	return $self->{'Name'};
 } #name
 
-# Get/set the Artist for this item
+=head2 $rec->artist( $artist )
+
+Get/set the Artist attribute for this item.
+
+=cut
+
 sub artist {
 	my $self = shift;
 
@@ -217,7 +222,12 @@ sub artist {
 	return $self->{'Artist'};
 } #artist
 
-# Get/set the Genre for this item
+=head2 $rec->genre( $genre )
+
+Get/set the Genre attribute for this item.
+
+=cut
+
 sub genre {
 	my $self = shift;
 
@@ -230,7 +240,12 @@ sub genre {
 	return $self->{'Genre'};
 } #genre
 
-# Get/set the Kind for this item
+=head2 $rec->kind( $kind )
+
+Get/set the Kind ("MPEG audio file", etc.) attribute for this item.
+
+=cut
+
 sub kind {
 	my $self = shift;
 
@@ -244,7 +259,12 @@ sub kind {
 	return $self->{'Kind'};
 } #kind
 
-# Get/set the Size for this item
+=head2 $rec->size( $size )
+
+Get/set the Size attribute for this item.
+
+=cut
+
 sub size {
 	my $self = shift;
 
@@ -257,7 +277,12 @@ sub size {
 	return $self->{'Size'};
 } #size
 
-# Get/set the Total Time for this item
+=head2 $rec->totalTime( $totalTime )
+
+Get/set the Total Time attribute for this item.
+
+=cut
+
 sub totalTime {
 	my $self = shift;
 
@@ -271,7 +296,12 @@ sub totalTime {
 	return $self->{'Total Time'};
 } #totalTime
 
-# Get/set the Year for this item
+=head2 $rec->year( $year )
+
+Get/set the Year attribute for this item.
+
+=cut
+
 sub year {
 	my $self = shift;
 
@@ -284,7 +314,12 @@ sub year {
 	return $self->{'Year'};
 } #year
 
-# Get/set the Date Modified for this item
+=head2 $rec->dateModified( $dateModified )
+
+Get/set the Date Modified attribute for this item.
+
+=cut
+
 sub dateModified {
 	my $self = shift;
 
@@ -298,7 +333,12 @@ sub dateModified {
 	return $self->{'Date Modified'};
 } #dateModified
 
-# Get/set the Date Added for this item
+=head2 $rec->dateAdded( $dateAdded )
+
+Get/set the Date Added attribute for this item.
+
+=cut
+
 sub dateAdded {
 	my $self = shift;
 
@@ -312,7 +352,12 @@ sub dateAdded {
 	return $self->{'Date Added'};
 } #dateAdded
 
-# Get/set the Bit Rate for this item
+=head2 $rec->dateAdded( $dateAdded )
+
+Get/set the Date Added attribute for this item.
+
+=cut
+
 sub bitRate {
 	my $self = shift;
 
@@ -326,7 +371,12 @@ sub bitRate {
 	return $self->{'Bit Rate'};
 } #bitRate
 
-# Get/set the Sample Rate for this item
+=head2 $rec->sampleRate( $sampleRate )
+
+Get/set the Sample Rate attribute for this item.
+
+=cut
+
 sub sampleRate {
 	my $self = shift;
 
@@ -340,7 +390,12 @@ sub sampleRate {
 	return $self->{'Sample Rate'};
 } #sampleRate
 
-# Get/set the Play Count for this item
+=head2 $rec->playCount( $playCount )
+
+Get/set the Play Count attribute for this item.
+
+=cut
+
 sub playCount {
 	my $self = shift;
 
@@ -354,7 +409,12 @@ sub playCount {
 	return $self->{'Play Count'};
 } #playCount
 
-# Get/set the Play Date for this item
+=head2 $rec->playDate( $playDate )
+
+Get/set the Play Date attribute for this item.
+
+=cut
+
 sub playDate {
 	my $self = shift;
 
@@ -368,7 +428,12 @@ sub playDate {
 	return $self->{'Play Date'};
 } #playDate
 
-# Get/set the Play Date UTC for this item
+=head2 $rec->playDateUTC( $playDateUTC )
+
+Get/set the Play Date UTC attribute for this item.
+
+=cut
+
 sub playDateUTC {
 	my $self = shift;
 
@@ -382,7 +447,12 @@ sub playDateUTC {
 	return $self->{'Play Date UTC'};
 } #playDateUTC
 
-# Get/set the Rating for this item
+=head2 $rec->rating( $rating )
+
+Get/set the Rating attribute for this item.
+
+=cut
+
 sub rating {
 	my $self = shift;
 
@@ -396,7 +466,12 @@ sub rating {
 	return $self->{'Rating'};
 } #rating
 
-# Get/set the Persistent ID for this item
+=head2 $rec->persistentID( $persistentID )
+
+Get/set the Persistent ID attribute for this item.
+
+=cut
+
 sub persistentID {
 	my $self = shift;
 
@@ -410,7 +485,12 @@ sub persistentID {
 	return $self->{'Persistent ID'};
 } #persistentID
 
-# Get/set the Track Type for this item
+=head2 $rec->trackType( $trackType )
+
+Get/set the Track Type attribute for this item.
+
+=cut
+
 sub trackType {
 	my $self = shift;
 
@@ -424,7 +504,12 @@ sub trackType {
 	return $self->{'Track Type'};
 } #trackType
 
-# Get/set the Location for this item
+=head2 $rec->location( $location )
+
+Get/set the Location attribute for this item.
+
+=cut
+
 sub location {
 	my $self = shift;
 
@@ -438,6 +523,11 @@ sub location {
 	return $self->{'Location'};
 } #location
 
+=head2 $rec->fileFolderCount( $fileFolderCount )
+
+Get/set the File Folder Count attribute for this item.
+
+=cut
 # Get/set the File Folder Count for this item
 sub fileFolderCount {
 	my $self = shift;
@@ -452,7 +542,12 @@ sub fileFolderCount {
 	return $self->{'File Folder Count'};
 } #fileFolderCount
 
-# Get/set the Library Folder Count for this item
+=head2 $rec->libraryFolderCount( $libraryFolderCount )
+
+Get/set the Library Folder Count attribute for this item.
+
+=cut
+
 sub libraryFolderCount {
 	my $self = shift;
 
