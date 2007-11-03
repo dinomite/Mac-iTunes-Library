@@ -1,9 +1,17 @@
 #!/usr/bin/perl -w
-#
-# Drew Stephens <drew@csh.rit.edu>
-# 2006-3-19
-#
-# Parse iTunes XML libraries and print some aggregate statistics.
+=head1 NAME
+
+examples/iTunesStats.pl
+
+=head1 SYNOPSIS
+
+perl iTunesStats.pl /path/to/itunes/music/library.xml num_top_items
+
+=head1 DESCRIPTION
+
+Parse iTunes XML libraries and print some aggregate statistics.
+
+=cut
 
 use warnings;
 use strict;
@@ -200,3 +208,21 @@ sub handleLine {
 
 	return $item;
 } #handleLine
+
+=head1 SEE ALSO
+
+L<Mac::iTunes>
+
+=head1 AUTHOR
+
+Drew Stephens, <lt>drewgstephens@gmail.com<gt>, http://dinomite.net
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2007 by Drew Stephens
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.8 or,
+at your option, any later version of Perl 5 you may have available.
+
+=cut
