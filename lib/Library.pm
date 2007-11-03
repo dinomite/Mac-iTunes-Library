@@ -118,6 +118,7 @@ sub size {
 sub _size {
 	my $self = shift;
 	my $num = shift;
+	return carp "Not adding undef size to library\n" unless ( defined $num );
 	$self->{Size} += $num;
 } #_size
 
@@ -136,6 +137,7 @@ sub time {
 sub _time {
 	my $self = shift;
 	my $time = shift;
+	return carp "Not adding undef time to library\n" unless ( defined $time );
 	$self->{Time} += $time if (defined $time);
 } #_time
 
@@ -155,6 +157,7 @@ sub artist {
 sub _artist {
 	my $self = shift;
 	my $artist = shift;
+	return carp "Not incrementing undef artist\n" unless ( defined $artist );
 	$self->{Artist}{ $artist } += 1;
 } #artist
 
@@ -174,7 +177,10 @@ sub partist {
 sub _partist {
 	my $self = shift;
 	my ($artist, $num) = @_;
-	return unless ( (defined $num) and (defined $artist) );
+	return carp "Not incrementing playcount for undef artist\n"
+		unless ( defined $artist );
+	return carp "Not incrementing playcount for $artist due to undef count\n"
+		unless ( defined $num );
 	$self->{PArtists}{ $artist } += $num;
 } #partist
 
@@ -194,6 +200,8 @@ sub genre {
 sub _genre {
 	my $self = shift;
 	my $genre = shift;
+	return carp "Not incrementing playcount for undef genre\n"
+		unless ( defined $genre );
 	$self->{Genre}{ $genre } += 1;
 } #_genre
 
@@ -213,7 +221,10 @@ sub pgenre {
 sub _pgenre {
 	my $self = shift;
 	my ($genre, $num) = @_;
-	return unless ( (defined $num)  and (defined $genre) );
+	return carp "Not incrementing playcount for undef genre\n"
+		unless ( defined $genre );
+	return carp "Not incrementing playcount for $genre due to undef count\n"
+		unless ( defined $num );
 	$self->{PGenre}{ $genre } += $num;
 } #_pgenre
 
@@ -232,6 +243,8 @@ sub type {
 sub _type {
 	my $self = shift;
 	my $type = shift;
+	return carp "Not incrementing count of undef type\n"
+		unless ( defined $type );
 	$self->{Type}{ $type } += 1;
 } #_type
 
@@ -357,6 +370,7 @@ sub parse_xml {
 	sub characters {
 		my ($expat, $string) = @_;
 		my $depth = scalar(@stack);
+
 		return if ($inPlaylists);
 
 		if ( $depth == 0 ) {		# plist version
