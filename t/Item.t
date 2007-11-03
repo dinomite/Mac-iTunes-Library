@@ -5,7 +5,7 @@
 use lib ".";
 use 5;
 use Test::More tests => 24;
-BEGIN { use_ok('Mac::iTunes::Item') };
+BEGIN { use_ok('Item') };
 #########################
 
 # Define the values for a item in a hash
