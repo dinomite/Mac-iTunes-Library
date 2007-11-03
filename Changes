@@ -1,0 +1,6 @@
+Revision history for Perl extension Mac iTunes::Item.
+
+0.01  Sun Oct  7 00:00:47 2007
+	- original version; created by h2xs 1.23 with options
+		-XAn Mac::iTunes::Item
+
