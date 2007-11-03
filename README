@@ -1,10 +1,11 @@
-Mac-iTunes-Item version 0.01
+Mac-iTunes version 0.01
 ==========================
 
-A representation of a single item within an iTunes library.
+A representation of an iTunes library.
 
 This modules provides a data structure for representing a item (song, URL,
-video) within an iTunes library.
+video) within an iTunes library and a collection of items to make a library.  It
+provides methods for parsing an iTunes XML formatted library.
 
 
 INSTALLATION

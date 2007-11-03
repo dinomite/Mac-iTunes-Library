@@ -1,1 +1,2 @@
 - Better date checking
+- Handle non-ASCI (ã) and character references (&#38;)

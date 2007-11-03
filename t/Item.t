@@ -34,31 +34,31 @@ my %values = (
 );
 
 # Create a new item
-my $rec = Mac::iTunes::Item->new(%values);
+my $item = Mac::iTunes::Item->new(%values);
 
 # Check the very basics
-ok(defined($rec), 'Create object');
-is($rec->isa('Mac::iTunes::Item'), 1, 'Object type');
+ok(defined($item), 'Create object');
+is($item->isa('Mac::iTunes::Item'), 1, 'Object type');
 
 # Make sure data is stored properly
-is($rec->trackID(), $values{'Track ID'}, 'Get Track ID');
-is($rec->name(), $values{'Name'}, 'Get Name');
-is($rec->artist(), $values{'Artist'}, 'Get Artist');
-is($rec->genre(), $values{'Genre'}, 'Get Genre');
-is($rec->kind(), $values{'Kind'}, 'Get Kind');
-is($rec->size(), $values{'Size'}, 'Get Size');
-is($rec->totalTime(), $values{'Total Time'}, 'Get Total Time');
-is($rec->year(), $values{'Year'}, 'Get Year');
-is($rec->dateModified(), $values{'Date Modified'}, 'Get Date Modified');
-is($rec->dateAdded(), $values{'Date Added'}, 'Get Added');
-is($rec->bitRate(), $values{'Bit Rate'}, 'Get Bit Rate');
-is($rec->sampleRate(), $values{'Sample Rate'}, 'Get Sample Rate');
-is($rec->playCount(), $values{'Play Count'}, 'Get Play Count');
-is($rec->playDate(), $values{'Play Date'}, 'Get Play Date');
-is($rec->playDateUTC(), $values{'Play Date UTC'}, 'Get Play Date UTC');
-is($rec->rating(), $values{'Rating'}, 'Get Rating');
-is($rec->persistentID(), $values{'Persistent ID'}, 'Get Persistent ID');
-is($rec->trackType(), $values{'Track Type'}, 'Get Track Type');
-is($rec->location(), $values{'Location'}, 'Get Location');
-is($rec->fileFolderCount(), $values{'File Folder Count'}, 'Get File Folder Count');
-is($rec->libraryFolderCount(), $values{'Library Folder Count'}, 'Get Total Time');
+is($item->trackID(), $values{'Track ID'}, 'Get Track ID');
+is($item->name(), $values{'Name'}, 'Get Name');
+is($item->artist(), $values{'Artist'}, 'Get Artist');
+is($item->genre(), $values{'Genre'}, 'Get Genre');
+is($item->kind(), $values{'Kind'}, 'Get Kind');
+is($item->size(), $values{'Size'}, 'Get Size');
+is($item->totalTime(), $values{'Total Time'}, 'Get Total Time');
+is($item->year(), $values{'Year'}, 'Get Year');
+is($item->dateModified(), $values{'Date Modified'}, 'Get Date Modified');
+is($item->dateAdded(), $values{'Date Added'}, 'Get Added');
+is($item->bitRate(), $values{'Bit Rate'}, 'Get Bit Rate');
+is($item->sampleRate(), $values{'Sample Rate'}, 'Get Sample Rate');
+is($item->playCount(), $values{'Play Count'}, 'Get Play Count');
+is($item->playDate(), $values{'Play Date'}, 'Get Play Date');
+is($item->playDateUTC(), $values{'Play Date UTC'}, 'Get Play Date UTC');
+is($item->rating(), $values{'Rating'}, 'Get Rating');
+is($item->persistentID(), $values{'Persistent ID'}, 'Get Persistent ID');
+is($item->trackType(), $values{'Track Type'}, 'Get Track Type');
+is($item->location(), $values{'Location'}, 'Get Location');
+is($item->fileFolderCount(), $values{'File Folder Count'}, 'Get File Folder Count');
+is($item->libraryFolderCount(), $values{'Library Folder Count'}, 'Get Total Time');
