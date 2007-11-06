@@ -37,7 +37,7 @@ Mac::iTunes::Library - Perl extension for representing an iTunes library
 		'Artist' => 'The Bar Band',
 		);
   $library->add($item);
-  print "This library has only " . $library->items() . "item.\n";
+  print "This library has only " . $library->num() . "item.\n";
 
 =head1 DESCRIPTION
 
@@ -111,7 +111,7 @@ Get the total size of the library
 
 sub size {
 	my $self = shift;
-	return $self->{Size};
+	return $self->{'Size'};
 } #size
 
 # Add to the library's total size
@@ -119,7 +119,7 @@ sub _size {
 	my $self = shift;
 	my $num = shift;
 	return unless ( defined $num );
-	$self->{Size} += $num;
+	$self->{'Size'} += $num;
 } #_size
 
 =head2 time()
@@ -130,7 +130,7 @@ Get the total time of the library
 
 sub time {
 	my $self = shift;
-	return $self->{Time};
+	return $self->{'Time'};
 } #time
 
 # Add to the library's total time
@@ -138,18 +138,18 @@ sub _time {
 	my $self = shift;
 	my $time = shift;
 	return unless ( defined $time );
-	$self->{Time} += $time if (defined $time);
+	$self->{'Time'} += $time if (defined $time);
 } #_time
 
 =head2 artist()
 
-Get the number of tracks for this artist.
+Get the hash of the number of tracks for each artist.
 
 =cut
 
 sub artist {
 	my $self = shift;
-	return %{$self->{Artist}};
+	return %{$self->{'Artist'}};
 } #artist
 
 # Increment the track count for the given artist
@@ -158,18 +158,18 @@ sub _artist {
 	my $self = shift;
 	my $artist = shift;
 	return unless ( defined $artist );
-	$self->{Artist}{ $artist } += 1;
+	$self->{'Artist'}{ $artist } += 1;
 } #artist
 
 =head2 partist()
 
-Get the number of plays (playcount) for this artist.
+Get the hash of the number of plays (playcount) for each artist.
 
 =cut
 
 sub partist {
 	my $self = shift;
-	return %{$self->{PArtists}};
+	return %{$self->{'PArtists'}};
 } #partist
 
 # Increment the playcount for the given artist by a given amount
@@ -179,18 +179,18 @@ sub _partist {
 	my ($artist, $num) = @_;
 	return unless ( defined $artist );
 	return unless ( defined $num );
-	$self->{PArtists}{ $artist } += $num;
+	$self->{'PArtists'}{ $artist } += $num;
 } #partist
 
 =head2 genre()
 
-Get the number of tracks in this genre.
+Get the hash of the number of tracks in each genre.
 
 =cut
 
 sub genre {
 	my $self = shift;
-	return %{$self->{Genre}};
+	return %{$self->{'Genre'}};
 } #genre
 
 # Incrment the track count for the given genre
@@ -199,18 +199,18 @@ sub _genre {
 	my $self = shift;
 	my $genre = shift;
 	return unless ( defined $genre );
-	$self->{Genre}{ $genre } += 1;
+	$self->{'Genre'}{ $genre } += 1;
 } #_genre
 
 =head2 pgenre()
 
-Get the number of plays (playcount) for this genre.
+Get the hash of the number of plays (playcount) for each genre.
 
 =cut
 
 sub pgenre {
 	my $self = shift;
-	return %{$self->{PGenre}};
+	return %{$self->{'PGenre'}};
 } #pgenre
 
 # Increment the playcount for the given genre by a given amount
@@ -220,7 +220,7 @@ sub _pgenre {
 	my ($genre, $num) = @_;
 	return unless ( defined $genre );
 	return unless ( defined $num );
-	$self->{PGenre}{ $genre } += $num;
+	$self->{'PGenre'}{ $genre } += $num;
 } #_pgenre
 
 =head2 type()
@@ -231,7 +231,7 @@ Get the hash of item types in the library
 
 sub type {
 	my $self = shift;
-	return %{$self->{Type}};
+	return %{$self->{'Type'}};
 } #type
 
 # Increment the count of items of the given type
@@ -239,8 +239,41 @@ sub _type {
 	my $self = shift;
 	my $type = shift;
 	return unless ( defined $type );
-	$self->{Type}{ $type } += 1;
+	$self->{'Type'}{ $type } += 1;
 } #_type
+
+=head2 items()
+
+Get the hash of Items (Artist->Name->[item, item]) contained in the library.
+
+=cut
+
+sub items {
+	my $self = shift;
+	return %{$self->{'Items'}};
+} #items
+
+# Add an item to our collection
+sub _item {
+	my $self = shift;
+	my $item = shift;
+
+	my $artist = $item->artist();
+	my $name = $item->name();
+
+	# Finally, add it to our collection of item
+	if (exists $self->{'Items'}{$artist}) {
+		if (exists $self->{'Items'}{$artist}{$name}) {
+			push @{$self->{'Items'}{$artist}{$name}}, $item;
+		} else {
+			# First occurrence of this title
+			$self->{'Items'}{$artist}{$name} = [$item];
+		}
+	} else {
+		# First occurrence of this artist
+		$self->{'Items'}{$artist}{$name} = [$item];
+	}
+} #_item
 
 =head2 add( Mac::iTunes::Item )
 
@@ -273,19 +306,7 @@ sub add {
 	$self->_partist($item->artist(), $item->playCount());
 	$self->_pgenre($item->genre(), $item->playCount());
 	$self->_type($item->trackType());
-
-	# Finally, add it to our collection of item
-	if (exists $self->{'item'}{$artist}) {
-		if (exists $self->{'item'}{$artist}{$name}) {
-			push @{$self->{'item'}{$artist}{$name}}, $item;
-		} else {
-			# First occurrence of this title
-			$self->{'item'}{$artist}{$name} = [$item];
-		}
-	} else {
-		# First occurrence of this artist
-		$self->{'item'}{$artist}{$name} = [$item];
-	}
+	$self->_item($item);
 } #add
 
 =head2 parse_xml ( filename )

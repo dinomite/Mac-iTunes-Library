@@ -4,7 +4,7 @@
 #########################
 use lib "./lib";
 use 5;
-use Test::More tests => 7;
+use Test::More tests => 9;
 BEGIN {
 	use_ok('Library');
 	use_ok('Item', 'use Item');
@@ -15,12 +15,16 @@ BEGIN {
 my $library = Mac::iTunes::Library->new();
 
 # Check the very basics
-ok(defined($library), 'Create object');
-is($library->isa('Mac::iTunes::Library'), 1, 'Object type');
+ok( defined($library), 'Create object' );
+is( $library->isa('Mac::iTunes::Library'), 1, 'Library Object type' );
 
 # Parse the sample library
 $library->parse_xml('t/iTunes Music Library.xml');
 
-is($library->num(), 18, 'Number of tracks');
-is($library->size(), 90103155, 'Library size');
-is($library->time(), 4209362, 'Total time');
+is( $library->num(), 18, 'Number of tracks' );
+is( $library->size(), 90103155, 'Library size' );
+is( $library->time(), 4209362, 'Total time' );
+
+my %items = $library->items();
+isnt( %items, undef, 'Items hash from items()' );
+is( $items{'ATB'}{'Push the Limits'}[0]->playCount(), 5, 'Item playcount' );

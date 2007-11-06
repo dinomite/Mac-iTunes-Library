@@ -107,10 +107,6 @@ print "\nMost popular genres, by number of tracks:\n";
 print "\nMost popular genres, by playcount:\n";
 &top($topNum, $library->pgenre());
 
-my %types = $library->type();
-my $files = $types{"File"};
-my $urls = $types{"URL"};
-print "\nFile types: $files files, $urls URLs\n";
 
 # Print the top n of a string->int hash
 sub top {
