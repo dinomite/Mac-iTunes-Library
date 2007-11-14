@@ -4,6 +4,7 @@ MANIFEST
 README
 TODO
 t/Item.t
-lib/Item.pm
-lib/Library.pm
-lib/XML.pm
+t/Library.t
+lib/Mac/iTunes/Item.pm
+lib/Mac/iTunes/Library.pm
+lib/Mac/iTunes/XML.pm

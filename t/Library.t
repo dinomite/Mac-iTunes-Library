@@ -6,9 +6,9 @@ use lib "./lib";
 use 5;
 use Test::More tests => 10;
 BEGIN {
-	use_ok('Library');
-	use_ok('XML', 'use XML');
-	use_ok('Item', 'use Item');
+	use_ok('Mac::iTunes::Library');
+	use_ok('Mac::iTunes::XML');
+	use_ok('Mac::iTunes::Item');
 };
 #########################
 

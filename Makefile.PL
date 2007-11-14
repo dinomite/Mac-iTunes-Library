@@ -3,8 +3,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME				=> 'Mac::iTunes',
-    VERSION_FROM		=> 'lib/Library.pm',
-    ABSTRACT_FROM		=> 'lib/Library.pm',
+    VERSION_FROM		=> 'lib/Mac/iTunes/Library.pm',
 	LICENSE				=> 'artistic2',
     AUTHOR				=> 'Drew Stephens <drewgstephens@gmail.com>',
     PREREQ_PM			=> {
