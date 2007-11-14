@@ -253,6 +253,8 @@ sub _item {
 
 	my $artist = $item->artist();
 	my $name = $item->name();
+	$artist = 'Unknown' unless (defined $artist);
+	$name = 'Unknown' unless (defined $name);
 
 	# Finally, add it to our collection of item
 	if (exists $self->{'Items'}{$artist}) {
