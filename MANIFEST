@@ -6,3 +6,4 @@ TODO
 t/Item.t
 lib/Item.pm
 lib/Library.pm
+lib/XML.pm

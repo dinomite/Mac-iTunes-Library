@@ -9,13 +9,6 @@ use XML::Parser;
 
 require Exporter;
 our @ISA = qw(Exporter);
-
-# Items to export into callers namespace by default. Note: do not export
-# names by default without a very good reason. Use EXPORT_OK instead.
-# Do not simply export all your public functions/methods/constants.
-# This allows declaration	use Mac::iTunes::Item ':all';
-# If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
-# will save memory.
 our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
@@ -308,114 +301,6 @@ sub add {
 	$self->_type($item->trackType());
 	$self->_item($item);
 } #add
-
-=head2 parse_xml ( filename )
-
-Parse an iTunes library XML file
-
-=cut
-
-sub parse_xml {
-	our $self = shift;
-	my $xmlFile = shift;
-
-	my $parser = XML::Parser->new( Handlers =>
-					{
-						Start => \&start_element,
-						End => \&end_element,
-						Char => \&characters,
-					});
-	$parser->parsefile( $xmlFile );
-
-	# Keep track of where we are
-	our @stack;
-	our ($item, $curKey, $characters, $inTracks, $inPlaylists) = undef;
-
-	### Parser start element
-	sub start_element {
-		my ($expat, $element, %attrs) = @_;
-
-		# Don't deal with playlists yet
-		return if ($inPlaylists);
-		
-		# Keep a trail of our depth
-		push @stack, $element;
-		my $depth = scalar(@stack);
-
-		if ( $depth == 0 ) {		# plist version
-		} elsif ( $depth == 1 ) {	# dict
-		} elsif ( $depth == 2 ) {
-		} elsif ( $depth == 3 ) {
-		} elsif ( $depth == 4 ) {
-			# We hit a new item in the XML; create a new object
-			$item = Mac::iTunes::Item->new() if ($element eq 'dict');
-		}
-	} #start_element
-
-
-	### Parser end element
-	sub end_element {
-		my ($expat, $element) = @_;
-
-		# Don't deal with playlists yet
-		return if ($inPlaylists);
-
-		# Prune the trail
-		my $depth = scalar(@stack);
-		pop @stack;
-
-		if ( $depth == 0 ) {		# plist version
-		} elsif ( $depth == 1 ) {	# dict
-		} elsif ( $depth == 2 ) {
-		} elsif ( $depth == 3 ) {
-			$inTracks = 0 if ($element eq 'dict');
-			$inPlaylists = 0 if ($element eq 'array');
-		} elsif ( $depth == 4 ) {
-			# Ending an item; add it to the library and clean up
-			if ( $item ) {
-				$self->add($item);
-			}
-
-			$item = undef if ($element eq 'dict');
-		} elsif ( $depth == 5 ) {
-			if ( $element =~ /(integer|string|date)/ ) {
-				$item->{$curKey} = $characters;
-				$characters = undef;
-			}
-		}
-	} #end_element
-
-
-	### Parser element contents
-	sub characters {
-		my ($expat, $string) = @_;
-		my $depth = scalar(@stack);
-
-		return if ($inPlaylists);
-
-		if ( $depth == 0 ) {		# plist version
-		} elsif ( $depth == 1 ) {	# dict
-		} elsif ( $depth == 2 ) {
-		} elsif ( $depth == 3 ) {
-			if ( $stack[$#stack] eq 'key' ) {
-				if ( $string eq 'Tracks' ) {
-					$inTracks = 1;
-				} elsif ( $string eq 'Playlists' ) {
-					$inPlaylists = 1;
-				}
-			}
-		} elsif ( $depth == 4 ) {
-		} elsif ( $depth == 5 ) {
-			if ( $stack[$#stack] eq 'key' ) {
-				# Grab the key's name
-				$curKey = $string;
-			} elsif ( $stack[$#stack] =~ /(integer|string|date)/ ) {
-				# Set the item's value for the previously grabbed key
-				$characters .= $string;
-			}
-		}
-	} #characters
-} #parse_xml
 
 1;
 

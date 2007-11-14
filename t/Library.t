@@ -4,9 +4,10 @@
 #########################
 use lib "./lib";
 use 5;
-use Test::More tests => 9;
+use Test::More tests => 10;
 BEGIN {
 	use_ok('Library');
+	use_ok('XML', 'use XML');
 	use_ok('Item', 'use Item');
 };
 #########################
@@ -19,7 +20,7 @@ ok( defined($library), 'Create object' );
 is( $library->isa('Mac::iTunes::Library'), 1, 'Library Object type' );
 
 # Parse the sample library
-$library->parse_xml('t/iTunes Music Library.xml');
+$library = Mac::iTunes::XML->parse('t/iTunes Music Library.xml');
 
 is( $library->num(), 18, 'Number of tracks' );
 is( $library->size(), 90103155, 'Library size' );

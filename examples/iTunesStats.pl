@@ -19,8 +19,9 @@ use strict;
 use lib '../lib';
 use Item;
 use Library;
+use XML;
 
-my $usage = "parser.pl library.xml number\n";
+my $usage = "iTunesStats.pl library.xml number\n";
 
 die $usage if (scalar(@ARGV) != 2);
 my $file = $ARGV[0];
@@ -28,7 +29,7 @@ my $topNum = $ARGV[1];
 
 # Make a new Library
 my $library = Mac::iTunes::Library->new();
-$library->parse_xml($file);
+$library = Mac::iTunes::XML->parse($file);
 
 # This parses the library XML file without using Mac::iTunes::Library's built-in
 # parser that employs XML::Parser
