@@ -1,6 +1,6 @@
 package Mac::iTunes::Item;
 
-use 5;
+use 5.006;
 use warnings;
 use strict;
 use Carp;
@@ -18,7 +18,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.01';
+our $VERSION = '0.01_01';
 
 my $dateRegex = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z';
 

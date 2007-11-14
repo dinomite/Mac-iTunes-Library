@@ -19,7 +19,7 @@ To install this module type the following:
 
 DEPENDENCIES
 
-None!
+	XML::Parser
 
 COPYRIGHT AND LICENCE
 

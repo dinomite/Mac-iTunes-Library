@@ -1,6 +1,6 @@
 package Mac::iTunes::Library;
 
-use 5;
+use 5.006;
 use warnings;
 use strict;
 use Carp;
@@ -20,7 +20,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.01';
+our $VERSION = '0.01_01';
 
 =head1 NAME
 
