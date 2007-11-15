@@ -20,7 +20,7 @@ ok( defined($library), 'Create object' );
 is( $library->isa('Mac::iTunes::Library'), 1, 'Library Object type' );
 
 # Parse the sample library
-$library = Mac::iTunes::XML->parse('t/iTunes Music Library.xml');
+$library = Mac::iTunes::XML->parse('t/iTunes_Music_Library.xml');
 
 is( $library->num(), 18, 'Number of tracks' );
 is( $library->size(), 90103155, 'Library size' );
