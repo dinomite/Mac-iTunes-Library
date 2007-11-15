@@ -8,3 +8,5 @@ t/Library.t
 lib/Mac/iTunes/Item.pm
 lib/Mac/iTunes/Library.pm
 lib/Mac/iTunes/XML.pm
+examples/iTunesStats.pl
+t/iTunes_Music_Library.xml
