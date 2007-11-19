@@ -5,7 +5,7 @@
 use lib ".";
 use 5;
 use Test::More tests => 24;
-BEGIN { use_ok('Mac::iTunes::Item') };
+BEGIN { use_ok('Mac::iTunes::Library::Item') };
 #########################
 
 # Define the values for a item in a hash
@@ -34,11 +34,11 @@ my %values = (
 );
 
 # Create a new item
-my $item = Mac::iTunes::Item->new(%values);
+my $item = Mac::iTunes::Library::Item->new(%values);
 
 # Check the very basics
 ok(defined($item), 'Create object');
-is($item->isa('Mac::iTunes::Item'), 1, 'Object type');
+is($item->isa('Mac::iTunes::Library::Item'), 1, 'Object type');
 
 # Make sure data is stored properly
 is($item->trackID(), $values{'Track ID'}, 'Get Track ID');

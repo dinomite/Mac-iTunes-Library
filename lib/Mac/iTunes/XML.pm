@@ -6,6 +6,7 @@ use strict;
 use Carp;
 
 use Mac::iTunes::Library;
+use XML::Parser;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -17,7 +18,7 @@ our $VERSION = '0.01_01';
 
 =head1 NAME
 
-Mac::iTunes::XML::Parser - Perl extension for parsing an iTunes XML library
+Mac::iTunes::XML - Perl extension for parsing an iTunes XML library
 
 =head1 SYNOPSIS
 
@@ -77,7 +78,7 @@ sub parse {
 		} elsif ( $depth == 3 ) {
 		} elsif ( $depth == 4 ) {
 			# We hit a new item in the XML; create a new object
-			$item = Mac::iTunes::Item->new() if ($element eq 'dict');
+			$item = Mac::iTunes::Library::Item->new() if ($element eq 'dict');
 		}
 	} #start_element
 

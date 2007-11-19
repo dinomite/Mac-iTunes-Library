@@ -7,8 +7,8 @@ use 5;
 use Test::More tests => 10;
 BEGIN {
 	use_ok('Mac::iTunes::Library');
+	use_ok('Mac::iTunes::Library::Item');
 	use_ok('Mac::iTunes::XML');
-	use_ok('Mac::iTunes::Item');
 };
 #########################
 

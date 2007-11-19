@@ -1,4 +1,4 @@
-package Mac::iTunes::Item;
+package Mac::iTunes::Library::Item;
 
 use 5.006;
 use warnings;

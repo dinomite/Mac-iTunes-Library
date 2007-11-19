@@ -5,8 +5,6 @@ use warnings;
 use strict;
 use Carp;
 
-use XML::Parser;
-
 require Exporter;
 our @ISA = qw(Exporter);
 our %EXPORT_TAGS = ( 'all' => [ qw() ] );
@@ -24,7 +22,7 @@ Mac::iTunes::Library - Perl extension for representing an iTunes library
   use Mac::iTunes::Library;
 
   my $library = Mac::iTunes::Library->new();
-  my $item = Mac::iTunes::Item->new(
+  my $item = Mac::iTunes::Library::Item->new(
   		'Track ID' => 1,
 		'Name' => 'The Fooiest Song',
 		'Artist' => 'The Bar Band',
@@ -51,8 +49,8 @@ None by default.
 
 =head2 new()
 
-Creates a new Mac::iTunes::Library object that can store Mac::iTunes::Item
-objects.
+Creates a new Mac::iTunes::Library object that can store
+Mac::iTunes::Library::Item objects.
 
 =cut
 
@@ -270,7 +268,7 @@ sub _item {
 	}
 } #_item
 
-=head2 add( Mac::iTunes::Item )
+=head2 add( Mac::iTunes::Library::Item )
 
 Add an item to the library
 
@@ -308,7 +306,7 @@ sub add {
 
 =head1 SEE ALSO
 
-L<Mac::iTunes>, L<Mac::iTunes::Item>
+L<Mac::iTunes>, L<Mac::iTunes::Library::Item>
 
 =head1 AUTHOR
 
