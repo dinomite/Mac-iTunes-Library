@@ -17,9 +17,9 @@ use warnings;
 use strict;
 
 use lib '../lib';
-use Mac::iTunes::Item;
 use Mac::iTunes::Library;
-use Mac::iTunes::XML;
+use Mac::iTunes::Library::Item;
+use Mac::iTunes::Library::XML;
 
 my $usage = "iTunesStats.pl library.xml number\n";
 
