@@ -7,7 +7,7 @@ TODO
 
 lib/Mac/iTunes/Library/Item.pm
 lib/Mac/iTunes/Library.pm
-lib/Mac/iTunes/XML.pm
+lib/Mac/iTunes/Library/XML.pm
 
 t/Item.t
 t/Library.t
