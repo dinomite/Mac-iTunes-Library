@@ -1,4 +1,4 @@
-package Mac::iTunes::XML;
+package Mac::iTunes::Library::XML;
 
 use 5.006;
 use warnings;
