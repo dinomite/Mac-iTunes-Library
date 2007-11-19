@@ -5,7 +5,7 @@ MANIFEST.SKIP
 README
 TODO
 
-lib/Mac/iTunes/Item.pm
+lib/Mac/iTunes/Library/Item.pm
 lib/Mac/iTunes/Library.pm
 lib/Mac/iTunes/XML.pm
 
