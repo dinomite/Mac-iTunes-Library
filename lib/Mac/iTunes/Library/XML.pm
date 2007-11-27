@@ -18,13 +18,13 @@ our $VERSION = '0.01_03';
 
 =head1 NAME
 
-Mac::iTunes::XML - Perl extension for parsing an iTunes XML library
+Mac::iTunes::Library::XML - Perl extension for parsing an iTunes XML library
 
 =head1 SYNOPSIS
 
-  use Mac::iTunes::XML;
+  use Mac::iTunes::Library::XML;
 
-  my $library = Mac::iTunes::XML->parse( 'iTunes Music Library.xml' );
+  my $library = Mac::iTunes::Library::XML->parse( 'iTunes Music Library.xml' );
   print "This library has only " . $library->num() . "item.\n";
 
 =head1 DESCRIPTION
