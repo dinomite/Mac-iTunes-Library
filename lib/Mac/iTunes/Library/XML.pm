@@ -6,6 +6,7 @@ use strict;
 use Carp;
 
 use Mac::iTunes::Library;
+use Mac::iTunes::Library::Item;
 use XML::Parser;
 
 require Exporter;
@@ -14,7 +15,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.01_03';
+our $VERSION = '0.01_04';
 
 =head1 NAME
 
