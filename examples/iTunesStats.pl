@@ -29,7 +29,7 @@ my $topNum = $ARGV[1];
 
 # Make a new Library
 my $library = Mac::iTunes::Library->new();
-$library = Mac::iTunes::XML->parse($file);
+$library = Mac::iTunes::Library::XML->parse($file);
 
 # This parses the library XML file without using Mac::iTunes::Library's built-in
 # parser that employs XML::Parser
