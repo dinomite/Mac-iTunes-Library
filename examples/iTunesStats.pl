@@ -21,7 +21,7 @@ use Mac::iTunes::Library;
 use Mac::iTunes::Library::Item;
 use Mac::iTunes::Library::XML;
 
-my $usage = "iTunesStats.pl library.xml number\n";
+my $usage = "iTunesStats.pl library.xml top_x_number\n";
 
 die $usage if (scalar(@ARGV) != 2);
 my $file = $ARGV[0];
@@ -30,43 +30,6 @@ my $topNum = $ARGV[1];
 # Make a new Library
 my $library = Mac::iTunes::Library->new();
 $library = Mac::iTunes::Library::XML->parse($file);
-
-# This parses the library XML file without using Mac::iTunes::Library's built-in
-# parser that employs XML::Parser
-#### Open the library
-###open IN, "<$file" or die "Couldn't open library for reading: $!";
-###
-#### Loop control; are we inside an item?
-###my $inside = undef;
-###my $item = undef;
-#### Gather data about a item, build a new one, add it to the library
-###my $line = <IN>;
-###while (defined $line) {
-###	chomp $line;
-###	# Stop when we hit playlists
-###	last if ( $line =~ m/^\t<key>Playlists<\/key>$/ );
-###
-###	# When we hit a new song key, loop to find the information we want
-###	if (defined $inside) {
-###		# Breakout when we reach the end of this item
-###		if ( $line =~ m/^\t\t<\/dict>$/ ) {
-###			# End of the item; add it to the library and move on
-###			$library->add($item);
-###			$item = undef;
-###			$inside = undef;
-###			next;
-###		}
-###
-###		# Get the item's attributes
-###		$item = handleLine($line, $item);
-###	} elsif ($line =~ /^\t\t<key>\d*<\/key>$/ ) {
-###		$item = Mac::iTunes::Item->new();
-###		$inside = 1;
-###	}
-###
-###	$line = <IN>
-###} #for
-###close IN;
 
 # Make some numbers
 my $librarySize = $library->size()/(1024**2);
@@ -147,64 +110,6 @@ sub by_number {
 	# Sort subroutine; expect $a and $b
 	if ($a > $b) { -1 } elsif ($a < $b) { 1 } else { 0 }
 } #by_number
-
-# Handle a line within a <dict> item, adding the attribute to the passed
-# iTunesItem object
-#
-# params:	($line, $item)
-# returns:	$item
-sub handleLine {
-	my $line = shift;
-	my $item = shift;
-	return Carp::carp("Not enough arguments") unless (defined $item);
-
-	if ($line =~ /<key>Track ID<\/key><integer>(\d*)<\/integer>/) {
-		$item->trackID($1);
-	} elsif($line =~ /<key>Name<\/key><string>(.*)<\/string>/) {
-		$item->name($1);
-	} elsif($line =~ /<key>Artist<\/key><string>(.*)<\/string>/) {
-		$item->artist($1);
-	} elsif($line =~ /<key>Genre<\/key><string>(.*)<\/string>/) {
-		$item->genre($1);
-	} elsif($line =~ /<key>Kind<\/key><string>(.*)<\/string>/) {
-		$item->kind($1);
-	} elsif($line =~ /<key>Size<\/key><integer>(\d.*)<\/integer>/) {
-		$item->size($1);
-	} elsif($line =~ /<key>Total Time<\/key><integer>(\d*)<\/integer>/) {
-		$item->totalTime($1);
-	} elsif($line =~ /<key>Year<\/key><integer>(\d*)<\/integer>/) {
-		$item->year($1);
-	} elsif($line =~ /<key>Date Modified<\/key><date>(.*)<\/date>/) {
-		$item->dateModified($1);
-	} elsif($line =~ /<key>Date Added<\/key><date>(.*)<\/date>/) {
-		$item->dateAdded($1);
-	} elsif($line =~ /<key>Bit Rate<\/key><integer>(\d*)<\/integer>/) {
-		$item->bitRate($1);
-	} elsif($line =~ /<key>Sample Rate<\/key><integer>(\d*)<\/integer>/) {
-		$item->sampleRate($1);
-	} elsif($line =~ /<key>Play Count<\/key><integer>(\d*)<\/integer>/) {
-		$item->playCount($1);
-	} elsif($line =~ /<key>Play Date<\/key><integer>(-\d*)<\/integer>/) {
-		$item->playDate($1);
-	} elsif($line =~ /<key>Play Date UTC<\/key><date>(.*)<\/date>/) {
-		$item->playDateUTC($1);
-	} elsif($line =~ /<key>Rating<\/key><integer>(\d*)<\/integer>/) {
-		$item->rating($1);
-	} elsif($line =~ /<key>Persistent ID<\/key><string>(.*)<\/string>/) {
-		$item->persistentID($1);
-	} elsif($line =~ /<key>Track Type<\/key><string>(.*)<\/string>/) {
-		$item->trackType($1);
-	} elsif($line =~ /<key>Location<\/key><string>(.*)<\/string>/) {
-		$item->location($1);
-	} elsif($line =~ /<key>File Folder Count<\/key><integer>(\d*)<\/integer>/) {
-		$item->fileFolderCount($1);
-	} elsif($line =~
-			/<key>Library Folder Count<\/key><integer>(\d*)<\/integer>/) {
-		$item->libraryFolderCount($1);
-	}
-
-	return $item;
-} #handleLine
 
 =head1 SEE ALSO
 
