@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.01_05';
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -76,6 +76,134 @@ sub new {
 sub DESTROY {
 	# Nothing to do.
 } #DESTROY
+
+=head2 version()
+
+Get/set the plist version number.
+
+=cut
+
+sub version {
+	my $self = shift;
+
+	if (@_) {
+		$self->{'plist'}{'version'} = shift;
+	} else {
+		return $self->{'plist'}{'version'};
+	}
+} #version
+
+=head2 majorVersion()
+
+Get/set the Major Version number
+
+=cut
+
+sub majorVersion {
+	my $self = shift;
+
+	if (@_) {
+		$self->{'Major Version'} = shift;
+	} else {
+		return $self->{'Major Version'};
+	}
+} #majorVersion
+
+=head2 minorVersion()
+
+Get/set the Minor Version number
+
+=cut
+
+sub minorVersion {
+	my $self = shift;
+
+	if (@_) {
+		$self->{'Minor Version'} = shift;
+	} else {
+		return $self->{'Minor Version'};
+	}
+} #minorVersion
+
+=head2 applicationVersion()
+
+Get/set the Application Version number
+
+=cut
+
+sub applicationVersion {
+	my $self = shift;
+
+	if (@_) {
+		$self->{'Application Version'} = shift;
+	} else {
+		return $self->{'Application Version'};
+	}
+} #applicationVersion
+
+=head2 features()
+
+Get/set the Features attribute
+
+=cut
+
+sub features {
+	my $self = shift;
+
+	if (@_) {
+		$self->{'Features'} = shift;
+	} else {
+		return $self->{'Features'};
+	}
+} #features
+
+=head2 showContentRating()
+
+Get/set the Show Content Rating attribute
+
+=cut
+
+sub showContentRating {
+	my $self = shift;
+
+	if (@_) {
+		$self->{'Show Content Rating'} = shift;
+	} else {
+		return $self->{'Show Content Rating'};
+	}
+} #showContentRating
+
+=head2 musicFolder()
+
+Get/set the Music Folder attribute
+
+=cut
+
+sub musicFolder {
+	my $self = shift;
+
+	if (@_) {
+		$self->{'Music Folder'} = shift;
+	} else {
+		return $self->{'Music Folder'};
+	}
+} #musicFolder
+
+=head2 libraryPersistentID()
+
+Get/set the Library Persistent ID
+
+=cut
+
+sub libraryPersistentID {
+	my $self = shift;
+
+	if (@_) {
+		$self->{'Library Persistent ID'} = shift;
+	} else {
+		return $self->{'Library Persistent ID'};
+	}
+} #libraryPersistentID
 
 =head2 num()
 
