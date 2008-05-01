@@ -31,7 +31,7 @@ is($library->majorVersion(), '1', 'Library Major Version');
 is($library->minorVersion(), '1', 'Library Minor Version');
 is($library->applicationVersion(), '7.4.2', 'Library Application Version');
 is($library->features(), '1', 'Library Features attribute');
-is($library->showContentRating(), 'true', 'Show Content Rating');
+is($library->showContentRatings(), 'true', 'Show Content Ratings');
 is($library->musicFolder(),
 		'file://localhost/Users/dinomite/Music/iTunes/iTunes%20Music/',
 		'Library Music Folder');

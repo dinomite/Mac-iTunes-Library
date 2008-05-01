@@ -92,7 +92,7 @@ sub start_element {
 	} elsif ( $depth == 2 ) {
 	} elsif ( $depth == 3 ) {
 		if (($element eq 'true') or ($element eq 'false')) {
-			$library->showContentRating($element);
+			$library->showContentRatings($element);
 		}
 	} elsif ( $depth == 4 ) {
 		# We hit a new item in the XML; create a new object

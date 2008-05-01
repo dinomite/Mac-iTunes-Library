@@ -157,21 +157,21 @@ sub features {
 	}
 } #features
 
-=head2 showContentRating()
+=head2 showContentRatings()
 
-Get/set the Show Content Rating attribute
+Get/set the Show Content Ratings attribute
 
 =cut
 
-sub showContentRating {
+sub showContentRatings {
 	my $self = shift;
 
 	if (@_) {
-		$self->{'Show Content Rating'} = shift;
+		$self->{'Show Content Ratings'} = shift;
 	} else {
-		return $self->{'Show Content Rating'};
+		return $self->{'Show Content Ratings'};
 	}
-} #showContentRating
+} #showContentRatings
 
 =head2 musicFolder()
 
