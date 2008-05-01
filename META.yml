@@ -1,0 +1,13 @@
+--- #YAML:1.0
+name:                Mac-iTunes-Library-XML
+version:             0.02
+abstract:            ~
+license:             perl
+distribution_type:   module
+requires:     
+    XML::Parser                 2.36
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
+    version: 1.2
+author:
+    - Drew Stephens <drew@dinomite.net>

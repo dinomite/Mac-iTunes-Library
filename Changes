@@ -1,6 +1,14 @@
 Revision history for Perl extension Mac iTunes::Item.
 
+0.02  Wed Apr  7 00:00:47 2007
+	-Added plist version
+	-Added the rest of the top-level library attributes
+		-Major, Minor, Application Versions
+		-Features
+		-Show Content Ratings
+		-Music Folder
+		-Library Persistent ID
+
 0.01  Sun Oct  7 00:00:47 2007
 	- original version; created by h2xs 1.23 with options
 		-XAn Mac::iTunes::Item
-
