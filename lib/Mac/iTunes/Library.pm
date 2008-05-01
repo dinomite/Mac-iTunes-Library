@@ -434,7 +434,7 @@ sub add {
 
 =head1 SEE ALSO
 
-L<Mac::iTunes>, L<Mac::iTunes::Library::Item>
+L<Mac::iTunes>, L<Mac::iTunes::Library::XML>, L<Mac::iTunes::Library::Item>
 
 =head1 AUTHOR
 
