@@ -17,7 +17,7 @@ my $dateRegex = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z';
 
 =head1 NAME
 
-Mac::iTunes::Library::Item - Perl extension for representing a item
+Mac::iTunes::Library::Item - Perl extension for representing an item
 (song, URL, video) within an iTunes library.
 
 =head1 SYNOPSIS
@@ -36,7 +36,7 @@ Mac::iTunes::Library::Item - Perl extension for representing a item
 
 =head1 DESCRIPTION
 
-A data structure for representing a item (song, URL, video) within an iTunes
+A data structure for representing an item (song, URL, video) within an iTunes
 library.  Use this along with Mac::iTunes::Library to create an iTunes library
 from which other information can be gleaned.
 
@@ -55,7 +55,7 @@ iTunes library item.
 	my $rec = Mac::iTunes::Item->new();
 
 The constructor can also be called initializing any number of the attributes of
-a item
+an item
 
 	my $rec = Mac::iTunes::Item->new();
 		'Track ID' => '73',
