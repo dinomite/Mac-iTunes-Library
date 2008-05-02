@@ -57,7 +57,7 @@ iTunes library item.
 The constructor can also be called initializing any number of the attributes of
 an item
 
-	my $rec = Mac::iTunes::Item->new();
+	my $rec = Mac::iTunes::Item->new(
 		'Track ID' => '73',
 		'Name' => 'Josie',
 		'Artist' => 'blink-182',
