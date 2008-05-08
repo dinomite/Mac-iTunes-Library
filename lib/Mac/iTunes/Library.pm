@@ -47,7 +47,9 @@ None by default.
 
 =head1 METHODS
 
-=head2 new()
+=over 4
+
+=item new()
 
 Creates a new Mac::iTunes::Library object that can store
 Mac::iTunes::Library::Item objects.
@@ -77,7 +79,7 @@ sub DESTROY {
 	# Nothing to do.
 } #DESTROY
 
-=head2 version()
+=item version()
 
 Get/set the plist version number.
 
@@ -93,7 +95,7 @@ sub version {
 	}
 } #version
 
-=head2 majorVersion()
+=item majorVersion()
 
 Get/set the Major Version number
 
@@ -109,7 +111,7 @@ sub majorVersion {
 	}
 } #majorVersion
 
-=head2 minorVersion()
+=item minorVersion()
 
 Get/set the Minor Version number
 
@@ -125,7 +127,7 @@ sub minorVersion {
 	}
 } #minorVersion
 
-=head2 applicationVersion()
+=item applicationVersion()
 
 Get/set the Application Version number
 
@@ -141,7 +143,7 @@ sub applicationVersion {
 	}
 } #applicationVersion
 
-=head2 features()
+=item features()
 
 Get/set the Features attribute
 
@@ -157,7 +159,7 @@ sub features {
 	}
 } #features
 
-=head2 showContentRatings()
+=item showContentRatings()
 
 Get/set the Show Content Ratings attribute
 
@@ -173,7 +175,7 @@ sub showContentRatings {
 	}
 } #showContentRatings
 
-=head2 musicFolder()
+=item musicFolder()
 
 Get/set the Music Folder attribute
 
@@ -189,7 +191,7 @@ sub musicFolder {
 	}
 } #musicFolder
 
-=head2 libraryPersistentID()
+=item libraryPersistentID()
 
 Get/set the Library Persistent ID
 
@@ -205,7 +207,7 @@ sub libraryPersistentID {
 	}
 } #libraryPersistentID
 
-=head2 num()
+=item num()
 
 Get the number of tracks in the library
 
@@ -222,7 +224,7 @@ sub _num {
 	$self->{'Num'} += 1;
 } #_num
 
-=head2 size()
+=item size()
 
 Get the total size of the library
 
@@ -241,7 +243,7 @@ sub _size {
 	$self->{'Size'} += $num;
 } #_size
 
-=head2 time()
+=item time()
 
 Get the total time of the library
 
@@ -260,7 +262,7 @@ sub _time {
 	$self->{'Time'} += $time if (defined $time);
 } #_time
 
-=head2 artist()
+=item artist()
 
 Get the hash of the number of tracks for each artist.
 
@@ -280,7 +282,7 @@ sub _artist {
 	$self->{'Artist'}{ $artist } += 1;
 } #artist
 
-=head2 partist()
+=item partist()
 
 Get the hash of the number of plays (playcount) for each artist.
 
@@ -301,7 +303,7 @@ sub _partist {
 	$self->{'PArtists'}{ $artist } += $num;
 } #partist
 
-=head2 genre()
+=item genre()
 
 Get the hash of the number of tracks in each genre.
 
@@ -321,7 +323,7 @@ sub _genre {
 	$self->{'Genre'}{ $genre } += 1;
 } #_genre
 
-=head2 pgenre()
+=item pgenre()
 
 Get the hash of the number of plays (playcount) for each genre.
 
@@ -342,7 +344,7 @@ sub _pgenre {
 	$self->{'PGenre'}{ $genre } += $num;
 } #_pgenre
 
-=head2 type()
+=item type()
 
 Get the hash of item types in the library
 
@@ -361,7 +363,7 @@ sub _type {
 	$self->{'Type'}{ $type } += 1;
 } #_type
 
-=head2 items()
+=item items()
 
 Get the hash of Items (Artist->Name->[item, item]) contained in the library.
 
@@ -396,7 +398,7 @@ sub _item {
 	}
 } #_item
 
-=head2 add( Mac::iTunes::Library::Item )
+=item add( Mac::iTunes::Library::Item )
 
 Add an item to the library
 
@@ -406,6 +408,8 @@ sub add {
 	my $self = shift;
 	my $item = shift;
 	return carp "Not enough arguments." unless (defined $item);
+    return carp "Argument isn't a Mac::iTunes::Library::Item."
+        unless ($item->isa("Mac::iTunes::Library::Item"));
 
 	my $artist = $item->artist();
 	my $name = $item->name();

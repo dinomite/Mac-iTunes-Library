@@ -44,10 +44,11 @@ from which other information can be gleaned.
 
 None by default.
 
-
 =head1 METHODS
 
-=head2 new()
+=over 4
+
+=item new()
 
 Creates a new Mac::iTunes::Library::Item object that can store all of the data
 of an iTunes library item.
@@ -166,7 +167,7 @@ sub DESTROY {
 # Nothing to do.
 } #DESTROY
 
-=head2 $rec->trackID( $id )
+=item trackID( $id )
 
 Get/set the Track ID attribute for this item.
 
@@ -197,7 +198,7 @@ sub name {
 	return $self->{'Name'};
 } #name
 
-=head2 $rec->artist( $artist )
+=item artist( $artist )
 
 Get/set the Artist attribute for this item.
 
@@ -215,7 +216,7 @@ sub artist {
 	return $self->{'Artist'};
 } #artist
 
-=head2 $rec->genre( $genre )
+=item genre( $genre )
 
 Get/set the Genre attribute for this item.
 
@@ -233,7 +234,7 @@ sub genre {
 	return $self->{'Genre'};
 } #genre
 
-=head2 $rec->kind( $kind )
+=item kind( $kind )
 
 Get/set the Kind ("MPEG audio file", etc.) attribute for this item.
 
@@ -252,7 +253,7 @@ sub kind {
 	return $self->{'Kind'};
 } #kind
 
-=head2 $rec->size( $size )
+=item size( $size )
 
 Get/set the Size attribute for this item.
 
@@ -270,7 +271,7 @@ sub size {
 	return $self->{'Size'};
 } #size
 
-=head2 $rec->totalTime( $totalTime )
+=item totalTime( $totalTime )
 
 Get/set the Total Time attribute for this item.
 
@@ -289,7 +290,7 @@ sub totalTime {
 	return $self->{'Total Time'};
 } #totalTime
 
-=head2 $rec->year( $year )
+=item year( $year )
 
 Get/set the Year attribute for this item.
 
@@ -307,7 +308,7 @@ sub year {
 	return $self->{'Year'};
 } #year
 
-=head2 $rec->dateModified( $dateModified )
+=item dateModified( $dateModified )
 
 Get/set the Date Modified attribute for this item.
 
@@ -326,7 +327,7 @@ sub dateModified {
 	return $self->{'Date Modified'};
 } #dateModified
 
-=head2 $rec->dateAdded( $dateAdded )
+=item dateAdded( $dateAdded )
 
 Get/set the Date Added attribute for this item.
 
@@ -345,7 +346,7 @@ sub dateAdded {
 	return $self->{'Date Added'};
 } #dateAdded
 
-=head2 $rec->dateAdded( $dateAdded )
+=item dateAdded( $dateAdded )
 
 Get/set the Date Added attribute for this item.
 
@@ -364,7 +365,7 @@ sub bitRate {
 	return $self->{'Bit Rate'};
 } #bitRate
 
-=head2 $rec->sampleRate( $sampleRate )
+=item sampleRate( $sampleRate )
 
 Get/set the Sample Rate attribute for this item.
 
@@ -383,7 +384,7 @@ sub sampleRate {
 	return $self->{'Sample Rate'};
 } #sampleRate
 
-=head2 $rec->playCount( $playCount )
+=item playCount( $playCount )
 
 Get/set the Play Count attribute for this item.
 
@@ -402,7 +403,7 @@ sub playCount {
 	return $self->{'Play Count'};
 } #playCount
 
-=head2 $rec->playDate( $playDate )
+=item playDate( $playDate )
 
 Get/set the Play Date attribute for this item.
 
@@ -421,7 +422,7 @@ sub playDate {
 	return $self->{'Play Date'};
 } #playDate
 
-=head2 $rec->playDateUTC( $playDateUTC )
+=item playDateUTC( $playDateUTC )
 
 Get/set the Play Date UTC attribute for this item.
 
@@ -440,7 +441,7 @@ sub playDateUTC {
 	return $self->{'Play Date UTC'};
 } #playDateUTC
 
-=head2 $rec->rating( $rating )
+=item rating( $rating )
 
 Get/set the Rating attribute for this item.
 
@@ -459,7 +460,7 @@ sub rating {
 	return $self->{'Rating'};
 } #rating
 
-=head2 $rec->persistentID( $persistentID )
+=item persistentID( $persistentID )
 
 Get/set the Persistent ID attribute for this item.
 
@@ -478,7 +479,7 @@ sub persistentID {
 	return $self->{'Persistent ID'};
 } #persistentID
 
-=head2 $rec->trackType( $trackType )
+=item trackType( $trackType )
 
 Get/set the Track Type attribute for this item.
 
@@ -497,7 +498,7 @@ sub trackType {
 	return $self->{'Track Type'};
 } #trackType
 
-=head2 $rec->location( $location )
+=item location( $location )
 
 Get/set the Location attribute for this item.
 
@@ -516,7 +517,7 @@ sub location {
 	return $self->{'Location'};
 } #location
 
-=head2 $rec->fileFolderCount( $fileFolderCount )
+=item fileFolderCount( $fileFolderCount )
 
 Get/set the File Folder Count attribute for this item.
 
@@ -535,7 +536,7 @@ sub fileFolderCount {
 	return $self->{'File Folder Count'};
 } #fileFolderCount
 
-=head2 $rec->libraryFolderCount( $libraryFolderCount )
+=item libraryFolderCount( $libraryFolderCount )
 
 Get/set the Library Folder Count attribute for this item.
 
