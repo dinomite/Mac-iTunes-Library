@@ -6,11 +6,13 @@ META.yml
 README
 TODO
 
-lib/Mac/iTunes/Library/Item.pm
 lib/Mac/iTunes/Library.pm
+lib/Mac/iTunes/Library/Item.pm
+lib/Mac/iTunes/Library/Playlist.pm
 lib/Mac/iTunes/Library/XML.pm
 
 t/Item.t
+t/Playlist.t
 t/Library.t
 t/iTunes_Music_Library.xml
 

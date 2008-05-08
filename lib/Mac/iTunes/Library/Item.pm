@@ -559,7 +559,8 @@ sub libraryFolderCount {
 
 =head1 SEE ALSO
 
-L<Mac::iTunes>, L<Mac::iTunes::Library>
+L<Mac::iTunes::Library>, L<Mac::iTunes::Library::Playlist>,
+L<Mac::iTunes::Library::XML>
 
 =head1 AUTHOR
 

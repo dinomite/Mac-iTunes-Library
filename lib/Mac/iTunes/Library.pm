@@ -384,7 +384,7 @@ sub _item {
 	$artist = 'Unknown' unless (defined $artist);
 	$name = 'Unknown' unless (defined $name);
 
-	# Finally, add it to our collection of item
+	# Finally, add it to our collection of items
 	if (exists $self->{'Items'}{$artist}) {
 		if (exists $self->{'Items'}{$artist}{$name}) {
 			push @{$self->{'Items'}{$artist}{$name}}, $item;
@@ -438,7 +438,8 @@ sub add {
 
 =head1 SEE ALSO
 
-L<Mac::iTunes>, L<Mac::iTunes::Library::XML>, L<Mac::iTunes::Library::Item>
+L<Mac::iTunes::Library::XML>, L<Mac::iTunes::Library::Item>,
+L<Mac::iTunes::Library::Playlist>
 
 =head1 AUTHOR
 

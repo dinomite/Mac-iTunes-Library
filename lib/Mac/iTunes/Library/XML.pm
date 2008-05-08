@@ -213,7 +213,8 @@ sub DESTROY {
 
 =head1 SEE ALSO
 
-L<Mac::iTunes>, L<Mac::iTunes::Item>, L<Mac::iTunes::Library>
+L<Mac::iTunes::Library::Item>, L<Mac::iTunes::Library>,
+L<Mac::iTunes::Library::Playlist>
 
 =head1 AUTHOR
 
