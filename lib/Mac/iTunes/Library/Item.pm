@@ -24,7 +24,7 @@ Mac::iTunes::Library::Item - Perl extension for representing an item
 
   use Mac::iTunes::Library::Item;
 
-  my $item = Mac::iTunes::Item->new(
+  my $item = Mac::iTunes::Library::Item->new(
   		'Track ID' => 1,
 		'Name' => 'The Fooiest Song',
 		'Artist' => 'The Bar Band',
@@ -49,15 +49,15 @@ None by default.
 
 =head2 new()
 
-Creates a new Mac::iTunes::Item object that can store all of the data of an
-iTunes library item.
+Creates a new Mac::iTunes::Library::Item object that can store all of the data
+of an iTunes library item.
 
-	my $rec = Mac::iTunes::Item->new();
+	my $rec = Mac::iTunes::Library::Item->new();
 
 The constructor can also be called initializing any number of the attributes of
 an item
 
-	my $rec = Mac::iTunes::Item->new(
+	my $rec = Mac::iTunes::Library::Item->new(
 		'Track ID' => '73',
 		'Name' => 'Josie',
 		'Artist' => 'blink-182',
