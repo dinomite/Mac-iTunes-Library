@@ -145,8 +145,8 @@ sub new {
 		allItems( $self, $params{'All Items'} );
 	} if ( exists( $params{'Smart Info'} ) ) {
 		smartInfo( $self, $params{'Smart Info'} );
-	} if ( exists( $params{'Smart Criterai'} ) ) {
-		smartCriteria( $self, $params{'Smart Criterai'} );
+	} if ( exists( $params{'Smart Criteria'} ) ) {
+		smartCriteria( $self, $params{'Smart Criteria'} );
 	} if ( exists( $params{'Playlist Items'} ) ) {
 		addItems( $self, $params{'Playlist Items'} );
 	}
@@ -158,6 +158,109 @@ sub new {
 sub DESTROY {
 # Nothing to do.
 } #DESTROY
+
+=item name( name )
+
+Get/set the name attribute for this playlist.
+
+=cut
+
+sub name {
+    my $self = shift;
+
+    if (@_) {
+        my $name = shift;
+        $self->{'name'} = $name;
+    }
+
+    return $self->{'name'};
+} #name
+
+=item playlistID( id )
+
+Get/set the Playlist ID attribute for this playlist.
+
+=cut
+
+sub playlistID {
+    my $self = shift;
+
+    if (@_) {
+        my $id = shift;
+        $self->{'Playlist ID'} = $id;
+    }
+
+    return $self->{'Playlist ID'};
+} #playlistID
+
+=item playlistPersistenID( id )
+
+Get/set the Playlist Persistent ID attribute for this playlist.
+
+=cut
+
+sub playlistPersistentID {
+    my $self = shift;
+
+    if (@_) {
+        my $id = shift;
+        $self->{'Playlist Persistent ID'} = $id;
+    }
+
+    return $self->{'Playlist Persistent ID'};
+} #playlistPersistentID
+
+=item allItems( 0|1 )
+
+Get/set the All Items attribute for this playlist.
+
+=cut
+
+sub allItems {
+    my $self = shift;
+
+    if (@_) {
+        my $allItems = shift;
+        return carp "All items must be 0 or 1." unless ($allItems =~ /^[01]$/);
+        $self->{'All Items'} = $allItems;
+    }
+
+    return $self->{'All Items'};
+} #allItems
+
+=item smartInfo( smartInfo )
+
+Get/set the Smart Info attribute for this playlist.
+
+=cut
+
+sub smartInfo {
+    my $self = shift;
+
+    if (@_) {
+        my $smartInfo = shift;
+        $self->{'Smart Info'} = $smartInfo;
+    }
+
+    return $self->{'Smart Info'};
+} #smartInfo
+
+=item smartCriteria( smartInfo )
+
+Get/set the Smart Criteria attribute for this playlist.
+
+=cut
+
+sub smartCriteria {
+    my $self = shift;
+
+    if (@_) {
+        my $smartCriteria = shift;
+        $self->{'Smart Criteria'} = $smartCriteria;
+    }
+
+    return $self->{'Smart Criteria'};
+} #smartCriteria
 
 =item num()
 
@@ -195,15 +298,15 @@ Add an array of items to this playlist; duplicates are allowed
 
 sub addItems {
 	my $self = shift;
-    my @items = shift;
+    my $items = shift;
 
     # Complain if there are any non-item objects
-    unless (grep {$_->isa('Mac::iTunes::Library::Item')} @items) {
+    unless (grep {$_->isa('Mac::iTunes::Library::Item')} @{$items}) {
         return carp "Given an array containig items that are not all " .
             "Mac::iTunes::Library::Item objects.";
     }
 
-    push @{$self->{'items'}}, @items;
+    push @{$self->{'items'}}, @{$items};
 } #addItems
 
 =item items()
@@ -231,8 +334,8 @@ sub item {
     # There may be duplicates
     my @items = grep {$_->trackID() == $id} @{$self->{'items'}};
 
-    return @items[0];
-} $item
+    return $items[0];
+} #item
 
 1;
 

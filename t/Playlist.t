@@ -5,13 +5,14 @@
 #########################
 use lib ".";
 use 5;
-use Test::More tests => 5;
+use Test::More tests => 11;
 BEGIN { use_ok('Mac::iTunes::Library::Item') };
 BEGIN { use_ok('Mac::iTunes::Library::Playlist') };
 #########################
 
 # Let's create a few simple items
 my @items = (
+        Mac::iTunes::Library::Item->new('Track ID' => 2),
         Mac::iTunes::Library::Item->new('Track ID' => 3),
         Mac::iTunes::Library::Item->new('Track ID' => 4),
         );
@@ -30,19 +31,27 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAGQAAAAAAAAAAAAAAAAAAAAB
 AAAAAAAAAGQAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 EOF
 
-my $playlist = Mac::iTunes::Library::Playlist->new(
+my %values = (
         'Name' => '5 Stars',
         'Playlist ID' => '10073',
         'Playlist Persistent ID' => '2E2D1396AF1DED73',
-        'All Items' => 'true',
+        'All Items' => 1,
         'Smart Info' => $smartInfo,
         'Smart Criteria' => $smartCriteria,
-        'Playlist Items' => @items,
+        'Playlist Items' => \@items,
         );
+
+my $playlist = Mac::iTunes::Library::Playlist->new(%values);
 
 # Check the very basics
 ok(defined($playlist), 'Create object');
-is($item->isa('Mac::iTunes::Library::Playlist'), 1, 'Object type');
+is($playlist->isa('Mac::iTunes::Library::Playlist'), 1, 'Object type');
+is($playlist->name(), $values{'Name'});
+is($playlist->playlistID(), $values{'Playlist ID'});
+is($playlist->playlistPersistentID(), $values{'Playlist Persistent ID'});
+is($playlist->allItems(), $values{'All Items'});
+is($playlist->smartInfo(), $values{'Smart Info'});
+is($playlist->smartCriteria(), $values{'Smart Criteria'});
 
 # Add another item to that playlist
 my $item = Mac::iTunes::Library::Item->new( 'Track ID' => 7 );
