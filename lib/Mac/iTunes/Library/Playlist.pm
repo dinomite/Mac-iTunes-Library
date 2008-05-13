@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.02';
+our $VERSION = '0.1';
 
 =head1 NAME
 
@@ -49,7 +49,7 @@ Mac::iTunes::Library::Playlist - Perl extension for representing a playlist
             'Smart Info' => $smartInfo,
             'Smart Criteria' => $smartCriteria,
             'Playlist Items' => @items,
-		);
+        );
 
   # Add another item to that playlist
   my $item = Mac::iTunes::Library::Item->new( 'Track ID' => 7 );
@@ -119,39 +119,39 @@ a hash:
 =cut
 
 sub new {
-	my $class = shift;
-	my %params = @_;
+    my $class = shift;
+    my %params = @_;
 
-	my $self = {
-		'Name' => undef,
-		'Playlist ID' => undef,
-		'Playlist Persistent ID' => undef,
-		'All Items' => undef,
-		'Smart Info' => undef,
-		'Smart Criteria' => undef,
-		'Playlist Items' => [],
-	};
+    my $self = {
+        'Name' => undef,
+        'Playlist ID' => undef,
+        'Playlist Persistent ID' => undef,
+        'All Items' => undef,
+        'Smart Info' => undef,
+        'Smart Criteria' => undef,
+        'Playlist Items' => [],
+    };
 
-	bless $self, $class;
+    bless $self, $class;
 
-	# Deal with parameters
-	if ( exists( $params{'Name'} ) ) {
-		name( $self, $params{'Name'} );
-	} if ( exists( $params{'Playlist ID'} ) ) {
-		playlistID( $self, $params{'Playlist ID'} );
-	} if ( exists( $params{'Playlist Persistent ID'} ) ) {
-		playlistPersistentID( $self, $params{'Playlist Persistent ID'} );
-	} if ( exists( $params{'All Items'} ) ) {
-		allItems( $self, $params{'All Items'} );
-	} if ( exists( $params{'Smart Info'} ) ) {
-		smartInfo( $self, $params{'Smart Info'} );
-	} if ( exists( $params{'Smart Criteria'} ) ) {
-		smartCriteria( $self, $params{'Smart Criteria'} );
-	} if ( exists( $params{'Playlist Items'} ) ) {
-		addItems( $self, $params{'Playlist Items'} );
-	}
+    # Deal with parameters
+    if ( exists( $params{'Name'} ) ) {
+        name( $self, $params{'Name'} );
+    } if ( exists( $params{'Playlist ID'} ) ) {
+        playlistID( $self, $params{'Playlist ID'} );
+    } if ( exists( $params{'Playlist Persistent ID'} ) ) {
+        playlistPersistentID( $self, $params{'Playlist Persistent ID'} );
+    } if ( exists( $params{'All Items'} ) ) {
+        allItems( $self, $params{'All Items'} );
+    } if ( exists( $params{'Smart Info'} ) ) {
+        smartInfo( $self, $params{'Smart Info'} );
+    } if ( exists( $params{'Smart Criteria'} ) ) {
+        smartCriteria( $self, $params{'Smart Criteria'} );
+    } if ( exists( $params{'Playlist Items'} ) ) {
+        addItems( $self, $params{'Playlist Items'} );
+    }
 
-	return $self;
+    return $self;
 } #new
 
 # Clean up
@@ -281,7 +281,7 @@ Add an item to this playlist; duplicates are allowed
 =cut
 
 sub addItem {
-	my $self = shift;
+    my $self = shift;
     my $item = shift;
 
     return carp "Need a Mac::iTunes::Library::Item object."
@@ -297,7 +297,7 @@ Add an array of items to this playlist; duplicates are allowed
 =cut
 
 sub addItems {
-	my $self = shift;
+    my $self = shift;
     my $items = shift;
 
     # Complain if there are any non-item objects
