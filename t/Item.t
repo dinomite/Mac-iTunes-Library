@@ -10,27 +10,27 @@ BEGIN { use_ok('Mac::iTunes::Library::Item') };
 
 # Define the values for a item in a hash
 my %values = (
-	'Track ID' => 1,
-	'Name' => 'Track Name',
-	'Artist' => 'Artist Name',
-	'Genre' => 'Genre Name',
-	'Kind' => 'MPEG audio file',
-	'Size' => 31337,
-	'Total Time' => 31337,
-	'Year' => '2007',
-	'Date Modified' => '2007-01-01T01:01:01Z',
-	'Date Added' => '2007-01-01T01:01:01Z',
-	'Bit Rate' => 128,
-	'Sample Rate' => 44100,
-	'Play Count' => 1,
-	'Play Date' => -1167613261,
-	'Play Date UTC' => '2007-01-01T01:01:01Z',
-	'Rating' => 50,
-	'Persistent ID' => 'DAC2FC501CCA2031',
-	'Track Type' => 'File',
-	'Location' => 'file://localhost/Users/dinomite/Music/Artist%20Name/Track%20Name.mp3',
-	'File Folder Count' => 4,
-	'Library Folder Count' => 1
+    'Track ID' => 1,
+    'Name' => 'Track Name',
+    'Artist' => 'Artist Name',
+    'Genre' => 'Genre Name',
+    'Kind' => 'MPEG audio file',
+    'Size' => 31337,
+    'Total Time' => 31337,
+    'Year' => '2007',
+    'Date Modified' => '2007-01-01T01:01:01Z',
+    'Date Added' => '2007-01-01T01:01:01Z',
+    'Bit Rate' => 128,
+    'Sample Rate' => 44100,
+    'Play Count' => 1,
+    'Play Date' => -1167613261,
+    'Play Date UTC' => '2007-01-01T01:01:01Z',
+    'Rating' => 50,
+    'Persistent ID' => 'DAC2FC501CCA2031',
+    'Track Type' => 'File',
+    'Location' => 'file://localhost/Users/dinomite/Music/Artist%20Name/Track%20Name.mp3',
+    'File Folder Count' => 4,
+    'Library Folder Count' => 1
 );
 
 # Create a new item
