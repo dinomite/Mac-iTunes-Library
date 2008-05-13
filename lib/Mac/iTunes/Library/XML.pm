@@ -1,13 +1,9 @@
-package Mac::iTunes::Library::XML;
+package Mac::iTunes::Library::Playlist;
 
 use 5.006;
 use warnings;
 use strict;
 use Carp;
-
-use Mac::iTunes::Library;
-use Mac::iTunes::Library::Item;
-use XML::Parser;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -19,18 +15,57 @@ our $VERSION = '0.02';
 
 =head1 NAME
 
-Mac::iTunes::Library::XML - Perl extension for parsing an iTunes XML library
+Mac::iTunes::Library::Playlist - Perl extension for representing a playlist
+(list of items by Track ID) within an iTunes library.
 
 =head1 SYNOPSIS
 
-  use Mac::iTunes::Library::XML;
+  use Mac::iTunes::Library::Playlist;
 
-  my $library = Mac::iTunes::Library::XML->parse( 'iTunes Music Library.xml' );
-  print "This library has only " . $library->num() . "item.\n";
+  # Let's create a few simple items
+  my @items = (
+          Mac::iTunes::Library::Item->new('Track ID' => 3),
+          Mac::iTunes::Library::Item->new('Track ID' => 4),
+          );
+  # Create a playlist
+  my $smartInfo =<< 'EOF';
+  AQEAAwAAAAIAAAAZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAA==
+  EOF
+
+  my $smartCriteria =<< 'EOF';
+  U0xzdAABAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAGQAAAAAAAAAAAAAAAAAAAAB
+  AAAAAAAAAGQAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+  EOF
+  my $playlist = Mac::iTunes::Library::Playlist->new(
+            'Name' => '5 Stars',
+            'Playlist ID' => '10073',
+            'Playlist Persistent ID' => '2E2D1396AF1DED73',
+            'All Items' => 'true',
+            'Smart Info' => $smartInfo,
+            'Smart Criteria' => $smartCriteria,
+            'Playlist Items' => @items,
+        );
+
+  # Add another item to that playlist
+  my $item = Mac::iTunes::Library::Item->new( 'Track ID' => 7 );
+  $playlist->addItem( $item );
+
+  # Get all of the items in the playlist
+  my @items = $playlist->items();
+
+  # Get an item by it's ID
+  $item = $playlist->item(3);
 
 =head1 DESCRIPTION
 
-Tools for dealing with iTunes XML libraries.
+A data structure for representing a playlist within an iTunes
+library.  Use this along with Mac::iTunes::Library to create an iTunes library
+from which other information can be gleaned.
 
 =head1 EXPORT
 
@@ -38,183 +73,275 @@ None by default.
 
 =head1 METHODS
 
-=item parse()
+=over 4
 
-Parses an iTunes XML library and returns a Mac::iTunes::Library object.
+=item new()
+
+Creates a new Mac::iTunes::Playlist object that can store all of the data of an
+iTunes library playlist.
+
+  my $playlist = Mac::iTunes::Playlist->new();
+
+The constructor can also be called with any number of attributes defined in
+a hash:
+
+  my $smartInfo =<< 'EOF';
+  AQEAAwAAAAIAAAAZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAA==
+  EOF
+
+  my $smartCriteria =<< 'EOF';
+  U0xzdAABAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABkAAAABAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAGQAAAAAAAAAAAAAAAAAAAAB
+  AAAAAAAAAGQAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+  EOF
+
+  # A few simple items
+  my @items = (
+          Mac::iTunes::Library::Item->new('Track ID' => 2),
+          Mac::iTunes::Library::Item->new('Track ID' => 3),
+          Mac::iTunes::Library::Item->new('Track ID' => 4),
+          );
+
+  my $playlist = Mac::iTunes::Playlist->new(
+        'Name' => '5 Stars',
+        'Playlist ID' => '10073',
+        'Playlist Persistent ID' => '2E2D1396AF1DED73',
+        'All Items' => 'true',
+        'Smart Info' => $smartInfo,
+        'Smart Criteria' => $smartCriteria,
+        'Playlist Items' => @items,
+        );
 
 =cut
 
-# The current 'key' of an item information that we're in
-my $curKey = undef;
-# A Mac::iTunes::Library::Item that will be built and added to the library
-my $item = undef;
-# A Mac::iTunes::Library that will be built
-my $library;
-# Characters that we collect
-my $characters = undef;
-# Keep track of where we are; push on each element name as we hit it
-my @stack;
-my ($inTracks, $inPlaylists, $inMajorVersion, $inMinorVersion,
-		$inApplicationVersion, $inFeatures, $inMusicFolder,
-		$inLibraryPersistentID) = undef;
+sub new {
+    my $class = shift;
+    my %params = @_;
 
-sub parse {
-	my $self = shift;
-	my $xmlFile = shift;
-	$library = Mac::iTunes::Library->new();
+    my $self = {
+        'Name' => undef,
+        'Playlist ID' => undef,
+        'Playlist Persistent ID' => undef,
+        'All Items' => undef,
+        'Smart Info' => undef,
+        'Smart Criteria' => undef,
+        'Playlist Items' => [],
+    };
 
-	my $parser = XML::Parser->new( Handlers => {
-						Start => \&start_element,
-						End => \&end_element,
-						Char => \&characters,
-					});
-	$parser->parsefile( $xmlFile );
-	return $library;
-} #parse
+    bless $self, $class;
 
-### Parser start element
-sub start_element {
-	my ($expat, $element, %attrs) = @_;
+    # Deal with parameters
+    if ( exists( $params{'Name'} ) ) {
+        name( $self, $params{'Name'} );
+    } if ( exists( $params{'Playlist ID'} ) ) {
+        playlistID( $self, $params{'Playlist ID'} );
+    } if ( exists( $params{'Playlist Persistent ID'} ) ) {
+        playlistPersistentID( $self, $params{'Playlist Persistent ID'} );
+    } if ( exists( $params{'All Items'} ) ) {
+        allItems( $self, $params{'All Items'} );
+    } if ( exists( $params{'Smart Info'} ) ) {
+        smartInfo( $self, $params{'Smart Info'} );
+    } if ( exists( $params{'Smart Criteria'} ) ) {
+        smartCriteria( $self, $params{'Smart Criteria'} );
+    } if ( exists( $params{'Playlist Items'} ) ) {
+        addItems( $self, $params{'Playlist Items'} );
+    }
 
-	# Don't deal with playlists yet
-	return if ($inPlaylists);
-	
-	# Keep a trail of our depth
-	push @stack, $element;
-	my $depth = scalar(@stack);
-
-	if ( $depth == 0 ) {
-	} elsif ( $depth == 1 ) {
-		# Hit the initial <plist version=""> tag
-		if (defined $attrs{'version'}) {
-			$library->version($attrs{'version'});
-		}
-	} elsif ( $depth == 2 ) {
-	} elsif ( $depth == 3 ) {
-		if (($element eq 'true') or ($element eq 'false')) {
-			$library->showContentRatings($element);
-		}
-	} elsif ( $depth == 4 ) {
-		# We hit a new item in the XML; create a new object
-		$item = Mac::iTunes::Library::Item->new() if ($element eq 'dict');
-	}
-} #start_element
-
-### Parser end element
-sub end_element {
-	my ($expat, $element) = @_;
-
-	# Don't deal with playlists yet
-	return if ($inPlaylists);
-
-	# Prune the trail
-	my $depth = scalar(@stack);
-	pop @stack;
-
-	if ( $depth == 0 ) {		# plist version
-	} elsif ( $depth == 1 ) {	# dict
-	} elsif ( $depth == 2 ) {
-	} elsif ( $depth == 3 ) {
-		# Exiting a major section
-		$inTracks = 0 if ($element eq 'dict');
-		$inPlaylists = 0 if ($element eq 'array');
-
-		if ($inMusicFolder and ($element eq 'string')) {
-			$library->musicFolder($characters);
-			$inMusicFolder = undef;
-			$characters = undef;
-		}
-	} elsif ( $depth == 4 ) {
-		# Ending an item; add it to the library and clean up
-		if ( $item ) {
-			$library->add($item);
-		}
-
-		$item = undef if ($element eq 'dict');
-	} elsif ( $depth == 5 ) {
-		# Set the attributes of the Mac::iTunes::Library::Item directly
-		if ( $element =~ /(integer|string|date)/ ) {
-			$item->{$curKey} = $characters;
-			$characters = undef;
-		}
-	}
-} #end_element
-
-### Parser element contents
-sub characters {
-	my ($expat, $string) = @_;
-	my $depth = scalar(@stack);
-
-	return if ($inPlaylists);
-
-	if ( $depth == 0 ) {		# plist version
-	} elsif ( $depth == 1 ) {	# dict
-	} elsif ( $depth == 2 ) {
-	} elsif ( $depth == 3 ) {
-		# Check the name of the element
-		if ( $stack[$#stack] eq 'key' ) {
-			# Lots of keys at this level
-			if ($string eq 'Major Version') {
-				$inMajorVersion = 1;
-			} elsif ( $string eq 'Minor Version' ) {
-				$inMinorVersion = 1;
-			} elsif ( $string eq 'Application Version' ) {
-				$inApplicationVersion = 1;
-			} elsif ( $string eq 'Features' ) {
-				$inFeatures = 1;
-			} elsif ( $string eq 'Music Folder' ) {
-				$inMusicFolder = 1;
-			} elsif ( $string eq 'Library Persistent ID' ) {
-				$inLibraryPersistentID = 1;
-			} elsif ( $string eq 'Tracks' ) {
-				$inTracks = 1;
-			} elsif ( $string eq 'Playlists' ) {
-				$inPlaylists = 1;
-			}
-		} elsif ( $stack[$#stack] =~ /(integer|string|string|true|false)/ ) {
-			if ($inMajorVersion) {
-				$library->majorVersion($string);
-				$inMajorVersion = undef;
-			} elsif ($inMinorVersion) {
-				$library->minorVersion($string);
-				$inMinorVersion = undef;
-			} elsif ($inApplicationVersion) {
-				$library->applicationVersion($string);
-				$inApplicationVersion = undef;
-			} elsif ($inFeatures) {
-				$library->features($string);
-				$inFeatures = undef;
-			} elsif ($inMusicFolder) {
-				# The music folder could be long; buffer it.
-				$characters .= $string;
-			} elsif ($inLibraryPersistentID) {
-				$library->libraryPersistentID($string);
-				$inLibraryPersistentID = undef;
-			}
-		}
-	} elsif ( $depth == 4 ) {
-	} elsif ( $depth == 5 ) {
-		if ( $stack[$#stack] eq 'key' ) {
-			# Grab the key's name; always comes in a single chunk
-			$curKey = $string;
-		} elsif ( $stack[$#stack] =~ /(integer|string|date)/ ) {
-			# Append it to the characters that we've gathered so far
-			$characters .= $string;
-		}
-	}
-} #characters
+    return $self;
+} #new
 
 # Clean up
 sub DESTROY {
-	# Nothing to do.
+# Nothing to do.
 } #DESTROY
+
+=item name( name )
+
+Get/set the name attribute for this playlist.
+
+=cut
+
+sub name {
+    my $self = shift;
+
+    if (@_) {
+        my $name = shift;
+        $self->{'name'} = $name;
+    }
+
+    return $self->{'name'};
+} #name
+
+=item playlistID( id )
+
+Get/set the Playlist ID attribute for this playlist.
+
+=cut
+
+sub playlistID {
+    my $self = shift;
+
+    if (@_) {
+        my $id = shift;
+        $self->{'Playlist ID'} = $id;
+    }
+
+    return $self->{'Playlist ID'};
+} #playlistID
+
+=item playlistPersistenID( id )
+
+Get/set the Playlist Persistent ID attribute for this playlist.
+
+=cut
+
+sub playlistPersistentID {
+    my $self = shift;
+
+    if (@_) {
+        my $id = shift;
+        $self->{'Playlist Persistent ID'} = $id;
+    }
+
+    return $self->{'Playlist Persistent ID'};
+} #playlistPersistentID
+
+=item allItems( 0|1 )
+
+Get/set the All Items attribute for this playlist.
+
+=cut
+
+sub allItems {
+    my $self = shift;
+
+    if (@_) {
+        my $allItems = shift;
+        return carp "All items must be 0 or 1." unless ($allItems =~ /^[01]$/);
+        $self->{'All Items'} = $allItems;
+    }
+
+    return $self->{'All Items'};
+} #allItems
+
+=item smartInfo( smartInfo )
+
+Get/set the Smart Info attribute for this playlist.
+
+=cut
+
+sub smartInfo {
+    my $self = shift;
+
+    if (@_) {
+        my $smartInfo = shift;
+        $self->{'Smart Info'} = $smartInfo;
+    }
+
+    return $self->{'Smart Info'};
+} #smartInfo
+
+=item smartCriteria( smartInfo )
+
+Get/set the Smart Criteria attribute for this playlist.
+
+=cut
+
+sub smartCriteria {
+    my $self = shift;
+
+    if (@_) {
+        my $smartCriteria = shift;
+        $self->{'Smart Criteria'} = $smartCriteria;
+    }
+
+    return $self->{'Smart Criteria'};
+} #smartCriteria
+
+=item num()
+
+Get the number of elements in this playlist.
+
+=cut
+
+sub num {
+    my $self = shift;
+
+    return scalar(@{$self->{'items'}});
+} #num
+
+=item addItem( Mac::iTunes::Library::Item )
+
+Add an item to this playlist; duplicates are allowed
+
+=cut
+
+sub addItem {
+    my $self = shift;
+    my $item = shift;
+
+    return carp "Need a Mac::iTunes::Library::Item object."
+        unless ($item->isa('Mac::iTunes::Library::Item'));
+
+    push @{$self->{'items'}}, $item;
+} #addItem
+
+=item addItems( Mac::iTunes::Library::Item )
+
+Add an array of items to this playlist; duplicates are allowed
+
+=cut
+
+sub addItems {
+    my $self = shift;
+    my $items = shift;
+
+    # Complain if there are any non-item objects
+    unless (grep {$_->isa('Mac::iTunes::Library::Item')} @{$items}) {
+        return carp "Given an array containig items that are not all " .
+            "Mac::iTunes::Library::Item objects.";
+    }
+
+    push @{$self->{'items'}}, @{$items};
+} #addItems
+
+=item items()
+
+Get an array of the items in the playlist.
+
+=cut
+
+sub items {
+    my $self = shift;
+
+    return @{$self->{'items'}};
+} #items
+
+=item item( trackID )
+
+Get an item by it's trackID
+
+=cut
+
+sub item {
+    my $self = shift;
+    my $id = shift;
+    
+    # There may be duplicates
+    my @items = grep {$_->trackID() == $id} @{$self->{'items'}};
+
+    return $items[0];
+} #item
 
 1;
 
 =head1 SEE ALSO
 
-L<Mac::iTunes::Library::Item>, L<Mac::iTunes::Library>,
-L<Mac::iTunes::Library::Playlist>
+L<Mac::iTunes::Library>, L<Mac::iTunes::Library::Item>
 
 =head1 AUTHOR
 

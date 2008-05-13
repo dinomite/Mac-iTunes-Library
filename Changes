@@ -1,6 +1,10 @@
 Revision history for Perl extension Mac iTunes::Item.
 
-0.02  Wed Apr  7 00:00:47 2007
+0.10  08 May 2008
+	-Added Playlist object
+	-Re-wrote POD in all files 
+
+0.02  Wed Apr  7 00:00:47 2008
 	-Added plist version
 	-Added the rest of the top-level library attributes
 		-Major, Minor, Application Versions
