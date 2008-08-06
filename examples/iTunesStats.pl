@@ -74,41 +74,41 @@ print "\nMost popular genres, by playcount:\n";
 
 # Print the top n of a string->int hash
 sub top {
-	my($num, %hash) = @_;
+    my($num, %hash) = @_;
 
-	my %reverse;
-	foreach my $artist ( keys %hash ) {
-		my $count = $hash{$artist};
+    my %reverse;
+    foreach my $artist ( keys %hash ) {
+        my $count = $hash{$artist};
 
-		if (exists $reverse{$count}) {
-			unshift @{$reverse{ $count }}, $artist;
-		} else {
-			$reverse{ $count } = [$artist];
-		}
-	} #foreach
+        if (exists $reverse{$count}) {
+            unshift @{$reverse{ $count }}, $artist;
+        } else {
+            $reverse{ $count } = [$artist];
+        }
+    } #foreach
 
-	# Sort the reverse keyset and print the $topNum
-	my @sorted = sort by_number keys(%reverse);
-	my $count = 0;
-	foreach my $numTracks (@sorted) {
-		last if ($count == $topNum);
-		my @artists = @{$reverse{$numTracks}};
-		print "\t$numTracks\t";
+    # Sort the reverse keyset and print the $topNum
+    my @sorted = sort by_number keys(%reverse);
+    my $count = 0;
+    foreach my $numTracks (@sorted) {
+        last if ($count == $topNum);
+        my @artists = @{$reverse{$numTracks}};
+        print "\t$numTracks\t";
 
-		for (my $x = 0; $x < scalar(@artists); $x++) {
-			print ", " if ($x > 0);
-			print $artists[$x];
-		} #for
+        for (my $x = 0; $x < scalar(@artists); $x++) {
+            print ", " if ($x > 0);
+            print $artists[$x];
+        } #for
 
-		print "\n";
+        print "\n";
 
-		$count++;
-	} #foreach
+        $count++;
+    } #foreach
 } #top
 
 sub by_number {
-	# Sort subroutine; expect $a and $b
-	if ($a > $b) { -1 } elsif ($a < $b) { 1 } else { 0 }
+    # Sort subroutine; expect $a and $b
+    if ($a > $b) { -1 } elsif ($a < $b) { 1 } else { 0 }
 } #by_number
 
 =head1 SEE ALSO
