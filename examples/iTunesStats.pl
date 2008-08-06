@@ -43,6 +43,7 @@ my $seconds = $totalTime%60;
 my $averageTime = ($totalTime/$library->num());
 my $averageMinutes = int($averageTime/60);
 my $averageSeconds = int($averageTime%60);
+my %artists = $library->artist();
 
 # Total tracks
 print "Number of tracks: " . $numTracks . "\n";
@@ -54,6 +55,9 @@ printf "Average size: %.2f MB\n", $librarySize/$numTracks;
 # Time
 print "Total time: ${days}d ${hours}h ${minutes}m ${seconds}s\t";
 print "Average time: ${averageMinutes}m${averageSeconds}s\n";
+
+# Ratio of songs/artists
+print "Ratio of songs/artists: " . $numTracks/(keys %artists) . "\n";
 
 # Artists
 print "\nMost popular artists, by number of tracks:\n";
