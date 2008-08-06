@@ -218,7 +218,7 @@ L<Mac::iTunes::Library::Playlist>
 
 =head1 AUTHOR
 
-Drew Stephens, <lt>drewgstephens@gmail.com<gt>, http://dinomite.net
+Drew Stephens <drewgstephens@gmail.com>, http://dinomite.net
 
 =head1 SVN INFO
 
