@@ -1,6 +1,14 @@
 # Before `make install' is performed this script should be runnable with
 # `make test'. After `make install' it should work as `perl Mac-iTunes-Item.t'
 
+=head1 SVN INFO
+
+$Revision$
+$Date$
+$Author$
+
+=cut
+
 #########################
 use lib ".";
 use 5;

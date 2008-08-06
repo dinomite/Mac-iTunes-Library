@@ -445,6 +445,12 @@ L<Mac::iTunes::Library::Playlist>
 
 Drew Stephens, <lt>drewgstephens@gmail.com<gt>, http://dinomite.net
 
+=head1 SVN INFO
+
+$Revision$
+$Date$
+$Author$
+
 =head1 COPYRIGHT AND LICENSE
 
 Copyright (C) 2007 by Drew Stephens

@@ -2,6 +2,14 @@
 # `make test'. After `make install' it should work as
 # `perl Mac-iTunes-Library-Playlist.t'
 
+=head1 SVN INFO
+
+$Revision$
+$Date$
+$Author$
+
+=cut
+
 #########################
 use lib ".";
 use 5;
