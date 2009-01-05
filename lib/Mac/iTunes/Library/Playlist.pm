@@ -345,7 +345,7 @@ L<Mac::iTunes::Library>, L<Mac::iTunes::Library::Item>
 
 =head1 AUTHOR
 
-Drew Stephens <drewgstephens@gmail.com>, http://dinomite.net
+Drew Stephens <drew@dinomite.net>, http://dinomite.net
 
 =head1 SVN INFO
 

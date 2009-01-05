@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 =head1 NAME
 
 examples/iTunesStats.pl
@@ -121,7 +121,7 @@ L<Mac::iTunes>
 
 =head1 AUTHOR
 
-Drew Stephens <drewgstephens@gmail.com>, http://dinomite.net
+Drew Stephens <drew@dinomite.net>, http://dinomite.net
 
 =head1 SVN INFO
 

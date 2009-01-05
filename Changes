@@ -2,7 +2,11 @@
 # $Date$
 # $Author$
 
-Revision history for Perl extension Mac iTunes::Item.
+Revision history for Perl extension Mac::iTunes::Library
+
+0.3   04 Jan 2009
+    - Added examples/scan.pl, contributed by Scott Lawrence
+    - Clarified the documentation in Mac::iTunes::Library
 
 0.2   05 Aug 2008
     - Added songs-per-artist ratio
