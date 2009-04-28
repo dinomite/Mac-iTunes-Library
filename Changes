@@ -4,6 +4,10 @@
 
 Revision history for Perl extension Mac::iTunes::Library
 
+0.4   27 Apr 2009    
+    - Added Album, Album Artist, and Composer to Item, Library, and XML
+    - Added Album Artist support to examples/iTunesStats.pl
+
 0.3   04 Jan 2009
     - Added examples/scan.pl, contributed by Scott Lawrence
     - Clarified the documentation in Mac::iTunes::Library
