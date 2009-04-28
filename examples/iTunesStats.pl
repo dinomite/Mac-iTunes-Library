@@ -67,6 +67,14 @@ print "\nMost popular artists, by number of tracks:\n";
 print "\nMost popular artists, by playcount:\n";
 &top($topNum, $library->partist());
 
+# Album Artists
+print "\nMost popular album artists, by number of tracks:\n";
+&top($topNum, $library->albumArtist());
+
+# Album Artists, playcount
+print "\nMost popular album artists, by playcount:\n";
+&top($topNum, $library->palbumArtist());
+
 # Genres
 print "\nMost popular genres, by number of tracks:\n";
 &top($topNum, $library->genre());

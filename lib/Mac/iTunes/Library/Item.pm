@@ -62,6 +62,9 @@ an item
         'Track ID' => '73',
         'Name' => 'Josie',
         'Artist' => 'blink-182',
+        'Album Artist' => 'blink-182',
+        'Composer' => 'blink-182',
+        'Album' => 'Dude Ranch',
         'Genre' => 'Pop Punk',
         'Kind' => 'MPEG audio file',
         'Size' => 31337,
@@ -92,6 +95,9 @@ sub new {
         'Track ID' => undef,
         'Name' => undef,
         'Artist' => undef,
+        'Album Artist' => undef,
+        'Composer' => undef,
+        'Album' => undef,
         'Genre' => undef,
         'Kind' => undef,
         'Size' => undef,
@@ -121,6 +127,12 @@ sub new {
         name( $self, $params{'Name'} );
     } if ( exists( $params{'Artist'} ) ) {
         artist( $self, $params{'Artist'} );
+    } if ( exists( $params{'Album Artist'} ) ) {
+        albumArtist( $self, $params{'Album Artist'} );
+    } if ( exists( $params{'Composer'} ) ) {
+        composer( $self, $params{'Composer'} );
+    } if ( exists( $params{'Album'} ) ) {
+        album( $self, $params{'Album'} );
     } if ( exists( $params{'Genre'} ) ) {
         genre( $self, $params{'Genre'} );
     } if ( exists( $params{'Kind'} ) ) {
@@ -215,6 +227,60 @@ sub artist {
 
     return $self->{'Artist'};
 } #artist
+
+=item albumArtist( $albumArtist )
+
+Get/set the Album Artist attribute for this item.
+
+=cut
+
+sub albumArtist {
+    my $self = shift;
+
+    if (@_) {
+        my $albumArtist = shift;
+        return carp "$albumArtist isn't a valid Album Artist" unless ($albumArtist =~ /.*/);
+        $self->{'Album Artist'} = $albumArtist;
+    }
+
+    return $self->{'Album Artist'};
+} #albumArtist
+
+=item composer( $composer )
+
+Get/set the Composer attribute for this item.
+
+=cut
+
+sub composer {
+    my $self = shift;
+
+    if (@_) {
+        my $composer = shift;
+        return carp "$composer isn't a valid Composer" unless ($composer =~ /.*/);
+        $self->{'Composer'} = $composer;
+    }
+
+    return $self->{'Composer'};
+} #composer
+
+=item album( $album )
+
+Get/set the Album attribute for this item.
+
+=cut
+
+sub album {
+    my $self = shift;
+
+    if (@_) {
+        my $album = shift;
+        return carp "$album isn't a valid Album" unless ($album =~ /.*/);
+        $self->{'Album'} = $album;
+    }
+
+    return $self->{'Album'};
+} #album
 
 =item genre( $genre )
 
