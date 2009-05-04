@@ -12,7 +12,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.4';
+our $VERSION = '0.5';
 
 my $dateRegex = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z';
 
@@ -78,7 +78,12 @@ an item
         'Play Count' => 1,
         'Play Date' => -1167613261,
         'Play Date UTC' => '2007-01-01T01:01:01Z',
+        'Skip Count' => 1,
+        'Skip Count UTC' => '2007-01-01T01:01:01Z',
         'Rating' => 50,
+        'Album Rating' => 50,
+        'Album Rating Computed' => 1,
+        'Compilation' => 1,
         'Persistent ID' => 'DAC2FC501CCA2031',
         'Track Type' => 'File',
         'Location' => 'file://localhost/Users/dinomite/Music/blink-182/Dude%20Ranch/Josie.mp3',
@@ -112,7 +117,12 @@ sub new {
         'Play Count' => undef,
         'Play Date' => undef,
         'Play Date UTC' => undef,
+        'Skip Count' => undef,
+        'Skip Count UTC' => undef,
         'Rating' => undef,
+        'Album Rating' => undef,
+        'Album Rating Computed' => undef,
+        'Compilation' => undef,
         'Persistent ID' => undef,
         'Track Type' => undef,
         'Location' => undef,
@@ -147,7 +157,13 @@ sub new {
             case 'Play Date' { playDate($self, $params{'Play Date'}) }
             case 'Play Date UTC' {
                    playDateUTC($self, $params{'Play Date UTC'}) }
+            case 'Skip Count' { skipCount($self, $params{'Skip Count'}) }
+            case 'Skip Date' { skipDate($self, $params{'Skip Date'}) }
             case 'Rating' { rating($self, $params{'Rating'}) }
+            case 'Album Rating' { albumRating($self, $params{'Album Rating'}) }
+            case 'Album Rating Computed' {
+                    albumRatingComputed($self, $params{'Album Rating Computed'}) }
+            case 'Compilation' { compilation($self, $params{'Compilation'}) }
             case 'Persistent ID' {
                    persistentID($self, $params{'Persistent ID'}) }
             case 'Track Type' { trackType($self, $params{'Track Type'}) }
@@ -156,7 +172,7 @@ sub new {
                    fileFolderCount($self, $params{'File Folder Count'}) }
             case 'Library Folder Count' {
                     libraryFolderCount($self, $params{'Library Folder Count'}) }
-            else {print "Param that I can't handl: $param\n"}
+            else {print "Param that I can't handle: $param\n"}
         }
     }
 
@@ -496,6 +512,44 @@ sub playDateUTC {
     return $self->{'Play Date UTC'};
 } #playDateUTC
 
+=item skipCount( $skipCount )
+
+Get/set the Skip Count attribute for this item.
+
+=cut
+
+sub skipCount {
+    my $self = shift;
+
+    if (@_) {
+        my $skipCount = shift;
+        return carp "$skipCount isn't a valid Skip Count"
+            unless ($skipCount =~ /\d{1,2}/);
+        $self->{'Skip Count'} = $skipCount;
+    }
+
+    return $self->{'Skip Count'};
+} #skipCount
+
+=item skipDate( $skipDate )
+
+Get/set the Skip Date attribute for this item.
+
+=cut
+
+sub skipDate {
+    my $self = shift;
+
+    if (@_) {
+        my $skipDate = shift;
+        return carp "$skipDate isn't a valid Skip Date"
+            unless ($skipDate =~ /$dateRegex/);
+        $self->{'Skip Date'} = $skipDate;
+    }
+
+    return $self->{'Skip Date'};
+} #skipDate
+
 =item rating( $rating )
 
 Get/set the Rating attribute for this item.
@@ -514,6 +568,59 @@ sub rating {
 
     return $self->{'Rating'};
 } #rating
+
+=item albumRating( $albumRating )
+
+Get/set the Album Rating attribute for this item.
+
+=cut
+
+sub albumRating {
+    my $self = shift;
+
+    if (@_) {
+        my $albumRating = shift;
+        return carp "$albumRating isn't a valid Album Rating"
+            unless ($albumRating =~ /\d{1,3}/);
+        $self->{'Album Rating'} = $albumRating;
+    }
+
+    return $self->{'Album Rating'};
+} #albumRating
+
+=item albumRatingComputed( $albumRatingComputed )
+
+Get/set the Album Rating Computed attribute for this item.
+
+=cut
+
+sub albumRatingComputed {
+    my $self = shift;
+
+    if (@_) {
+        my $albumRatingComputed = shift;
+        $self->{'Album Rating Computed'} = $albumRatingComputed;
+    }
+
+    return $self->{'Album Rating Computed'};
+} #albumRatingComputed
+
+=item compilation( $albumRatingComputed )
+
+Get/set the Compilation attribute for this item.
+
+=cut
+
+sub compilation {
+    my $self = shift;
+
+    if (@_) {
+        my $compilation = shift;
+        $self->{'Compilation'} = $compilation;
+    }
+
+    return $self->{'Compilation'};
+} #compilation
 
 =item persistentID( $persistentID )
 

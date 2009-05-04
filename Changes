@@ -4,7 +4,13 @@
 
 Revision history for Perl extension Mac::iTunes::Library
 
-0.4   27 Apr 2009    
+0.5   03 May 2009
+    - Reorganized constructor in Item.pm
+    - Added support for Skip Count, Skip Date, Album Rating,
+        Album Rating Computed, and Compilation
+    - Includes contributions from Garrett Scott <garrett@gothik.org>
+
+0.4   27 Apr 2009
     - Added Album, Album Artist, and Composer to Item, Library, and XML
     - Added Album Artist support to examples/iTunesStats.pl
 
