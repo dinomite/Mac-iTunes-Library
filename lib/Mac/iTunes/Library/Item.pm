@@ -728,6 +728,10 @@ L<Mac::iTunes::Library::XML>
 
 Drew Stephens <drew@dinomite.net>, http://dinomite.net
 
+=head1 SOURCE REPOSITORY
+
+http://mac-itunes.googlecode.com
+
 =head1 SVN INFO
 
 $Revision$
