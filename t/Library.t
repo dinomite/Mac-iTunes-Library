@@ -1,78 +1,49 @@
 # Before `make install' is performed this script should be runnable with
 # `make test'. After `make install' it should work as `perl Mac-iTunes-Item.t'
 
-=head1 SVN INFO
-
-$Revision$
-$Date$
-$Author$
-
-=cut
-
 #########################
-use lib ".";
+use lib "./lib";
 use 5;
-use Test::More tests => 27;
-BEGIN { use_ok('Mac::iTunes::Library::Item') };
+use Test::More tests => 21;
+BEGIN {
+	use_ok('Mac::iTunes::Library');
+	use_ok('Mac::iTunes::Library::Item');
+	use_ok('Mac::iTunes::Library::XML');
+};
 #########################
 
-# Define the values for a item in a hash
-my %values = (
-    'Track ID' => 1,
-    'Name' => 'Track Name',
-    'Artist' => 'Artist Name',
-    'Album Artist' => 'Album Artist Name',
-    'Composer' => 'Composer Name',
-    'Album' => 'Album Name',
-    'Genre' => 'Genre Name',
-    'Kind' => 'MPEG audio file',
-    'Size' => 31337,
-    'Total Time' => 31337,
-    'Year' => '2007',
-    'Date Modified' => '2007-01-01T01:01:01Z',
-    'Date Added' => '2007-01-01T01:01:01Z',
-    'Bit Rate' => 128,
-    'Sample Rate' => 44100,
-    'Play Count' => 1,
-    'Play Date' => -1167613261,
-    'Play Date UTC' => '2007-01-01T01:01:01Z',
-    'Rating' => 50,
-    'Persistent ID' => 'DAC2FC501CCA2031',
-    'Track Type' => 'File',
-    'Location' => 'file://localhost/Users/dinomite/Music/Artist%20Name/Track%20Name.mp3',
-    'File Folder Count' => 4,
-    'Library Folder Count' => 1
-);
-
-# Create a new item
-my $item = Mac::iTunes::Library::Item->new(%values);
+# Create a new library
+my $library = Mac::iTunes::Library->new();
 
 # Check the very basics
-ok(defined($item), 'Create object');
-is($item->isa('Mac::iTunes::Library::Item'), 1, 'Object type');
+ok( defined($library), 'Create object' );
+is( $library->isa('Mac::iTunes::Library'), 1, 'Library Object type' );
 
-# Make sure data is stored properly
-is($item->trackID(), $values{'Track ID'}, 'Get Track ID');
-is($item->name(), $values{'Name'}, 'Get Name');
-is($item->artist(), $values{'Artist'}, 'Get Artist');
-is($item->albumArtist(), $values{'Album Artist'}, 'Get Album Artist');
-is($item->composer(), $values{'Composer'}, 'Get Composer');
-is($item->album(), $values{'Album'}, 'Get Album');
-is($item->genre(), $values{'Genre'}, 'Get Genre');
-is($item->kind(), $values{'Kind'}, 'Get Kind');
-is($item->size(), $values{'Size'}, 'Get Size');
-is($item->totalTime(), $values{'Total Time'}, 'Get Total Time');
-is($item->year(), $values{'Year'}, 'Get Year');
-is($item->dateModified(), $values{'Date Modified'}, 'Get Date Modified');
-is($item->dateAdded(), $values{'Date Added'}, 'Get Added');
-is($item->bitRate(), $values{'Bit Rate'}, 'Get Bit Rate');
-is($item->sampleRate(), $values{'Sample Rate'}, 'Get Sample Rate');
-is($item->playCount(), $values{'Play Count'}, 'Get Play Count');
-is($item->playDate(), $values{'Play Date'}, 'Get Play Date');
-is($item->playDateUTC(), $values{'Play Date UTC'}, 'Get Play Date UTC');
-is($item->rating(), $values{'Rating'}, 'Get Rating');
-is($item->persistentID(), $values{'Persistent ID'}, 'Get Persistent ID');
-is($item->trackType(), $values{'Track Type'}, 'Get Track Type');
-is($item->location(), $values{'Location'}, 'Get Location');
-is($item->fileFolderCount(), $values{'File Folder Count'}, 'Get File Folder Count');
-is($item->libraryFolderCount(), $values{'Library Folder Count'}, 'Get Total Time');
+# Parse the sample library
+$library = Mac::iTunes::Library::XML->parse('t/iTunes_Music_Library.xml');
+
+# Check the general values of the library
+is($library->num(), 18, 'Number of tracks');
+is($library->size(), 90103155, 'Library size');
+is($library->time(), 4209362, 'Total time');
+is($library->version(), '1.0', 'Library plist version');
+is($library->majorVersion(), '1', 'Library Major Version');
+is($library->minorVersion(), '1', 'Library Minor Version');
+is($library->applicationVersion(), '7.4.2', 'Library Application Version');
+is($library->features(), '1', 'Library Features attribute');
+is($library->showContentRatings(), 'true', 'Show Content Ratings');
+is($library->musicFolder(),
+		'file://localhost/Users/dinomite/Music/iTunes/iTunes%20Music/',
+		'Library Music Folder');
+is($library->libraryPersistentID(), 'E68DAC8D289AF116',
+		'Library Persistent ID');
+
+# Check some of the items that ought to be
+my %items = $library->items();
+isnt(%items, undef, 'Items hash from items()');
+is($items{'ATB'}{'Push the Limits'}[0]->playCount(), 5, 'Item playcount');
+is($items{'ATB'}{'Push the Limits'}[0]->genre(), 'Trance', 'Item Genre');
+is($items{'ATB'}{'Push the Limits'}[0]->persistentID(), 'DAC2FC501CCA2031',
+		'Item Persistent ID');
+is($items{'ATB'}{'Push the Limits'}[0]->libraryFolderCount(), '1',
+		'Item Library Folder Count');

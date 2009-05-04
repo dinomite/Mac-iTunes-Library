@@ -12,7 +12,7 @@ $Author$
 #########################
 use lib ".";
 use 5;
-use Test::More tests => 27;
+use Test::More tests => 32;
 BEGIN { use_ok('Mac::iTunes::Library::Item') };
 #########################
 
@@ -36,7 +36,12 @@ my %values = (
     'Play Count' => 1,
     'Play Date' => -1167613261,
     'Play Date UTC' => '2007-01-01T01:01:01Z',
+    'Skip Count' => 7,
+    'Skip Date' => '2007-01-01T01:01:01Z',
     'Rating' => 50,
+    'Album Rating' => 60,
+    'Album Rating Computed' => 1,
+    'Compilation' => 1,
     'Persistent ID' => 'DAC2FC501CCA2031',
     'Track Type' => 'File',
     'Location' => 'file://localhost/Users/dinomite/Music/Artist%20Name/Track%20Name.mp3',
@@ -70,7 +75,12 @@ is($item->sampleRate(), $values{'Sample Rate'}, 'Get Sample Rate');
 is($item->playCount(), $values{'Play Count'}, 'Get Play Count');
 is($item->playDate(), $values{'Play Date'}, 'Get Play Date');
 is($item->playDateUTC(), $values{'Play Date UTC'}, 'Get Play Date UTC');
+is($item->skipCount(), $values{'Skip Count'}, 'Get Skip Count');
+is($item->skipDate(), $values{'Skip Date'}, 'Get Skip Date');
 is($item->rating(), $values{'Rating'}, 'Get Rating');
+is($item->albumRating(), $values{'Album Rating'}, 'Get Alubm Rating');
+is($item->albumRatingComputed(), $values{'Album Rating Computed'}, 'Get Album Rating Computed');
+is($item->compilation(), $values{'Compilation'}, 'Get Compilation');
 is($item->persistentID(), $values{'Persistent ID'}, 'Get Persistent ID');
 is($item->trackType(), $values{'Track Type'}, 'Get Track Type');
 is($item->location(), $values{'Location'}, 'Get Location');

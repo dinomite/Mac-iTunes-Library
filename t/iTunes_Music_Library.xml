@@ -35,7 +35,12 @@ time is 70m9s.
 			<key>Play Count</key><integer>5</integer>
 			<key>Play Date</key><integer>3271231422</integer>
 			<key>Play Date UTC</key><date>2007-08-29T15:23:42Z</date>
+            <key>Skip Count</key><integer>1024</integer>
+            <key>Skip Date</key><date>2008-01-02T02:32:48Z</date>
 			<key>Rating</key><integer>60</integer>
+            <key>Album Rating</key><integer>60</integer>
+            <key>Album Rating Computed</key><true/>
+            <key>Compilation</key><true/>
 			<key>Persistent ID</key><string>DAC2FC501CCA2031</string>
 			<key>Track Type</key><string>File</string>
 			<key>Location</key><string>file://localhost/Users/dinomite/Music/iTunes/iTunes%20Music/ATB/Unknown%20Album/Push%20the%20Limits.mp3</string>
