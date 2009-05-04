@@ -136,6 +136,8 @@ sub end_element {
         if ( $element =~ /(integer|string|date)/ ) {
             $item->{$curKey} = $characters;
             $characters = undef;
+        } elsif ( $element =~ /true/ ) {
+            $item->{$curKey} = 1;
         }
     }
 } #end_element
