@@ -4,6 +4,7 @@ use 5.006;
 use warnings;
 use strict;
 use Carp;
+use Switch;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -91,6 +92,7 @@ sub new {
     my $class = shift;
     my %params = @_;
 
+    # Initialize
     my $self = {
         'Track ID' => undef,
         'Name' => undef,
@@ -121,54 +123,41 @@ sub new {
     bless $self, $class;
 
     # Deal with parameters
-    if ( exists( $params{'Track ID'} ) ) {
-        trackID( $self, $params{'Track ID'} );
-    } if ( exists( $params{'Name'} ) ) {
-        name( $self, $params{'Name'} );
-    } if ( exists( $params{'Artist'} ) ) {
-        artist( $self, $params{'Artist'} );
-    } if ( exists( $params{'Album Artist'} ) ) {
-        albumArtist( $self, $params{'Album Artist'} );
-    } if ( exists( $params{'Composer'} ) ) {
-        composer( $self, $params{'Composer'} );
-    } if ( exists( $params{'Album'} ) ) {
-        album( $self, $params{'Album'} );
-    } if ( exists( $params{'Genre'} ) ) {
-        genre( $self, $params{'Genre'} );
-    } if ( exists( $params{'Kind'} ) ) {
-        kind( $self, $params{'Kind'} );
-    } if ( exists( $params{'Size'} ) ) {
-        size( $self, $params{'Size'} );
-    } if ( exists( $params{'Total Time'} ) ) {
-        totalTime( $self, $params{'Total Time'} );
-    } if ( exists( $params{'Year'} ) ) {
-        year( $self, $params{'Year'} );
-    } if ( exists( $params{'Date Modified'} ) ) {
-        dateModified( $self, $params{'Date Modified'} );
-    } if ( exists( $params{'Date Added'} ) ) {
-        dateAdded( $self, $params{'Date Added'} );
-    } if ( exists( $params{'Bit Rate'} ) ) {
-        bitRate( $self, $params{'Bit Rate'} );
-    } if ( exists( $params{'Sample Rate'} ) ) {
-        sampleRate( $self, $params{'Sample Rate'} );
-    } if ( exists( $params{'Play Count'} ) ) {
-        playCount( $self, $params{'Play Count'} );
-    } if ( exists( $params{'Play Date'} ) ) {
-        playDate( $self, $params{'Play Date'} );
-    } if ( exists( $params{'Play Date UTC'} ) ) {
-        playDateUTC( $self, $params{'Play Date UTC'} );
-    } if ( exists( $params{'Rating'} ) ) {
-        rating( $self, $params{'Rating'} );
-    } if ( exists( $params{'Persistent ID'} ) ) {
-        persistentID( $self, $params{'Persistent ID'} );
-    } if ( exists( $params{'Track Type'} ) ) {
-        trackType( $self, $params{'Track Type'} );
-    } if ( exists( $params{'Location'} ) ) {
-        location( $self, $params{'Location'} );
-    } if ( exists( $params{'File Folder Count'} ) ) {
-        fileFolderCount( $self, $params{'File Folder Count'} );
-    } if ( exists( $params{'Library Folder Count'} ) ) {
-        libraryFolderCount( $self, $params{'Library Folder Count'} );
+    foreach my $param (keys %params) {
+        next unless (defined $param);
+
+        switch ($param) {
+            case 'Track ID' { trackID($self, $params{'Track ID'}) }
+            case 'Name' { name($self, $params{'Name'}) }
+            case 'Artist' { artist($self, $params{'Artist'}) }
+            case 'Album Artist' { albumArtist($self, $params{'Album Artist'}) }
+            case 'Composer' { composer($self, $params{'Composer'}) }
+            case 'Album' { album($self, $params{'Album'}) }
+            case 'Genre' { genre($self, $params{'Genre'}) }
+            case 'Kind' { kind($self, $params{'Kind'}) }
+            case 'Size' { size($self, $params{'Size'}) }
+            case 'Total Time' { totalTime($self, $params{'Total Time'}) }
+            case 'Year' { year($self, $params{'Year'}) }
+            case 'Date Modified' {
+                   dateModified($self, $params{'Date Modified'}) }
+            case 'Date Added' { dateAdded($self, $params{'Date Added'}) }
+            case 'Bit Rate' { bitRate($self, $params{'Bit Rate'}) }
+            case 'Sample Rate' { sampleRate($self, $params{'Sample Rate'}) }
+            case 'Play Count' { playCount($self, $params{'Play Count'}) }
+            case 'Play Date' { playDate($self, $params{'Play Date'}) }
+            case 'Play Date UTC' {
+                   playDateUTC($self, $params{'Play Date UTC'}) }
+            case 'Rating' { rating($self, $params{'Rating'}) }
+            case 'Persistent ID' {
+                   persistentID($self, $params{'Persistent ID'}) }
+            case 'Track Type' { trackType($self, $params{'Track Type'}) }
+            case 'Location' { location($self, $params{'Location'}) }
+            case 'File Folder Count' {
+                   fileFolderCount($self, $params{'File Folder Count'}) }
+            case 'Library Folder Count' {
+                    libraryFolderCount($self, $params{'Library Folder Count'}) }
+            else {print "Param that I can't handl: $param\n"}
+        }
     }
 
     return $self;
@@ -412,7 +401,7 @@ sub dateAdded {
     return $self->{'Date Added'};
 } #dateAdded
 
-=item dateAdded( $dateAdded )
+=item bitRate( $bitRate )
 
 Get/set the Date Added attribute for this item.
 
