@@ -38,7 +38,7 @@ None by default.
 
 =head1 METHODS
 
-=item parse()
+=item parse( $libraryFile )
 
 Parses an iTunes XML library and returns a Mac::iTunes::Library object.
 
