@@ -14,8 +14,6 @@ our @EXPORT = qw( );
 
 our $VERSION = '0.5';
 
-my $dateRegex = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z';
-
 =head1 NAME
 
 Mac::iTunes::Library::Item - Perl extension for representing an item
@@ -195,7 +193,7 @@ sub trackID {
 
     if (@_) {
         my $id = shift;
-        return carp "$id isn't a valid Track ID" unless ($id =~ /\d*/);
+        return carp "$id isn't a valid Track ID" unless _checkNum($id);
         $self->{'Track ID'} = $id;
     }
 
@@ -244,7 +242,8 @@ sub albumArtist {
 
     if (@_) {
         my $albumArtist = shift;
-        return carp "$albumArtist isn't a valid Album Artist" unless ($albumArtist =~ /.*/);
+        return carp "$albumArtist isn't a valid Album Artist"
+                unless ($albumArtist =~ /.*/);
         $self->{'Album Artist'} = $albumArtist;
     }
 
@@ -262,7 +261,8 @@ sub composer {
 
     if (@_) {
         my $composer = shift;
-        return carp "$composer isn't a valid Composer" unless ($composer =~ /.*/);
+        return carp "$composer isn't a valid Composer"
+                unless ($composer =~ /.*/);
         $self->{'Composer'} = $composer;
     }
 
@@ -317,7 +317,7 @@ sub kind {
     if (@_) {
         my $kind = shift;
         return carp "$kind isn't a valid Kind"
-            unless ($kind =~ /(MPEG|AAC|MPEG-4|Audible) ?(audio|video)? (file|stream)/);
+                unless ($kind =~ /(MPEG|AAC|MPEG-4|Audible) ?(audio|video)? (file|stream)/);
         $self->{'Kind'} = $kind;
     }
 
@@ -335,7 +335,7 @@ sub size {
 
     if (@_) {
         my $size = shift;
-        return carp "$size isn't a valid Size" unless ($size =~ /\d*/);
+        return carp "$size isn't a valid Size" unless _checkNum($size);
         $self->{'Size'} = $size;
     }
 
@@ -354,7 +354,7 @@ sub totalTime {
     if (@_) {
         my $totalTime = shift;
         return carp "$totalTime isn't a valid Total Time"
-            unless ($totalTime =~ /\d*/);
+                unless _checkNum($totalTime);
         $self->{'Total Time'} = $totalTime;
     }
 
@@ -391,7 +391,7 @@ sub dateModified {
     if (@_) {
         my $dateModified = shift;
         return carp "$dateModified isn't a valid Date Modified"
-            unless ($dateModified =~ /$dateRegex/);
+                unless _checkDate($dateModified);
         $self->{'Date Modified'} = $dateModified;
     }
 
@@ -410,7 +410,7 @@ sub dateAdded {
     if (@_) {
         my $dateAdded = shift;
         return carp "$dateAdded isn't a valid Date Added"
-            unless ($dateAdded =~ /$dateRegex/);
+                unless _checkDate($dateAdded);
         $self->{'Date Added'} = $dateAdded;
     }
 
@@ -429,7 +429,7 @@ sub bitRate {
     if (@_) {
         my $bitRate = shift;
         return carp "$bitRate isn't a valid Bit Rate"
-            unless ($bitRate =~ /\d{2,3}/);
+                unless ($bitRate =~ /\d{2,3}/);
         $self->{'Bit Rate'} = $bitRate;
     }
 
@@ -486,7 +486,7 @@ sub playDate {
     if (@_) {
         my $playDate = shift;
         return carp "$playDate isn't a valid Play Date"
-            unless ($playDate =~ /-\d{10}/);
+                unless ($playDate =~ /-\d{10}/);
         $self->{'Play Date'} = $playDate;
     }
 
@@ -505,7 +505,7 @@ sub playDateUTC {
     if (@_) {
         my $playDateUTC = shift;
         return carp "$playDateUTC isn't a valid Play Date UTC"
-            unless ($playDateUTC =~ /$dateRegex/);
+                unless _checkDate($playDateUTC);
         $self->{'Play Date UTC'} = $playDateUTC;
     }
 
@@ -524,7 +524,7 @@ sub skipCount {
     if (@_) {
         my $skipCount = shift;
         return carp "$skipCount isn't a valid Skip Count"
-            unless ($skipCount =~ /\d{1,2}/);
+                unless ($skipCount =~ /\d{1,2}/);
         $self->{'Skip Count'} = $skipCount;
     }
 
@@ -543,7 +543,7 @@ sub skipDate {
     if (@_) {
         my $skipDate = shift;
         return carp "$skipDate isn't a valid Skip Date"
-            unless ($skipDate =~ /$dateRegex/);
+                unless _checkDate($skipDate);
         $self->{'Skip Date'} = $skipDate;
     }
 
@@ -562,7 +562,7 @@ sub rating {
     if (@_) {
         my $rating = shift;
         return carp "$rating isn't a valid Rating"
-            unless ($rating =~ /\d{1,3}/);
+                unless ($rating =~ /\d{1,3}/);
         $self->{'Rating'} = $rating;
     }
 
@@ -634,7 +634,7 @@ sub persistentID {
     if (@_) {
         my $persistentID = shift;
         return carp "$persistentID isn't a valid Persistent ID"
-            unless ($persistentID =~ /\w{16}/);
+                unless ($persistentID =~ /\w{16}/);
         $self->{'Persistent ID'} = $persistentID;
     }
 
@@ -653,7 +653,7 @@ sub trackType {
     if (@_) {
         my $trackType = shift;
         return carp "$trackType isn't a valid Track Type"
-            unless ($trackType =~ /(File|URL)/);
+                unless ($trackType =~ /(File|URL)/);
         $self->{'Track Type'} = $trackType;
     }
 
@@ -672,7 +672,7 @@ sub location {
     if (@_) {
         my $location = shift;
         return carp "$location isn't a valid Location"
-            unless ($location =~ /.*/);
+                unless ($location =~ /.*/);
         $self->{'Location'} = $location;
     }
 
@@ -691,7 +691,7 @@ sub fileFolderCount {
     if (@_) {
         my $fileFolderCount = shift;
         return carp "$fileFolderCount isn't a valid File Folder Count"
-            unless ($fileFolderCount =~ /\d*/);
+            unless _checkNum($fileFolderCount);
         $self->{'File Folder Count'} = $fileFolderCount;
     }
 
@@ -710,12 +710,29 @@ sub libraryFolderCount {
     if (@_) {
         my $libraryFolderCount = shift;
         return carp "$libraryFolderCount isn't a valid Library Folder Count"
-            unless ($libraryFolderCount =~ /\d*/);
+                unless _checkNum($libraryFolderCount);
         $self->{'Library Folder Count'} = $libraryFolderCount;
     }
 
     return $self->{'Library Folder Count'};
 } #libraryFolderCount
+
+
+##### Support methods #####
+# Is it a number?
+sub _checkNum {
+    my $digit = shift;
+
+    return $digit =~ /\d*/;
+} #_checkNum
+
+# Is it a date?
+sub _checkDate {
+    my $date = shift;
+
+    return $date =~ /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z/;
+} #_checkDate
+
 
 1;
 
