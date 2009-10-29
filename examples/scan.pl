@@ -56,7 +56,7 @@ foreach my $artist ( sort keys %items ) {
 
 =head1 SEE ALSO
 
-L<Mac::iTunes>
+L<Mac::iTunes::Library>
 
 =head1 AUTHOR
 

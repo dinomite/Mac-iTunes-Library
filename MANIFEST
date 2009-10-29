@@ -1,11 +1,14 @@
 Changes
 Contributors
-Makefile.PL
 MANIFEST
 MANIFEST.SKIP
 META.yml
+Makefile.PL
 README
 TODO
+
+examples/iTunesStats.pl
+examples/scan.pl
 
 lib/Mac/iTunes/Library.pm
 lib/Mac/iTunes/Library/Item.pm
@@ -13,9 +16,7 @@ lib/Mac/iTunes/Library/Playlist.pm
 lib/Mac/iTunes/Library/XML.pm
 
 t/Item.t
-t/Playlist.t
 t/Library.t
+t/Playlist.t
+t/ParsePlaylist.t
 t/iTunes_Music_Library.xml
-
-examples/iTunesStats.pl
-examples/scan.pl

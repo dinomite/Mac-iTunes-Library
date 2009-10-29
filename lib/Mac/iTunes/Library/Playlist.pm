@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.5';
+our $VERSION = '0.6';
 
 =head1 NAME
 
@@ -170,10 +170,10 @@ sub name {
 
     if (@_) {
         my $name = shift;
-        $self->{'name'} = $name;
+        $self->{'Name'} = $name;
     }
 
-    return $self->{'name'};
+    return $self->{'Name'};
 } #name
 
 =item playlistID( id )
@@ -288,6 +288,7 @@ sub addItem {
         unless ($item->isa('Mac::iTunes::Library::Item'));
 
     push @{$self->{'items'}}, $item;
+    # TODO: shouldn't this be referencing a track already in the lib?
 } #addItem
 
 =item addItems( Mac::iTunes::Library::Item )
@@ -346,6 +347,10 @@ L<Mac::iTunes::Library>, L<Mac::iTunes::Library::Item>
 =head1 AUTHOR
 
 Drew Stephens <drew@dinomite.net>, http://dinomite.net
+
+=head1 CONTRIBUTORS
+
+Mark Grimes <mgrimes@cpan.org>, http://www.peculiarities.com
 
 =head1 SOURCE REPOSITORY
 

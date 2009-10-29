@@ -10,3 +10,7 @@ Scott Lawrence (http://linkedin.com/in/scottdlawrence)
 Garrett Scott <garrett@gothik.org>
     Handling of Boolean values in XML library parser; spurred me to clean up
     Item as well, to handle all values.
+
+Mark Grimes <mgrimes@cpan.org> (http://www.peculiarities.com)
+    Parsing playlists from the XML file
+    https://rt.cpan.org/Ticket/Display.html?id=50668

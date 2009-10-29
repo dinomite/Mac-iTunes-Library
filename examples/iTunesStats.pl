@@ -125,7 +125,7 @@ sub by_number {
 
 =head1 SEE ALSO
 
-L<Mac::iTunes>
+L<Mac::iTunes::Library>
 
 =head1 AUTHOR
 

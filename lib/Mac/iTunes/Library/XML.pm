@@ -7,7 +7,8 @@ use Carp;
 
 use Mac::iTunes::Library;
 use Mac::iTunes::Library::Item;
-use XML::Parser;
+use Mac::iTunes::Library::Playlist;
+use XML::Parser 2.36;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -15,7 +16,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.5';
+our $VERSION = '0.6';
 
 =head1 NAME
 
@@ -53,7 +54,7 @@ my $library;
 # Characters that we collect
 my $characters = undef;
 # Keep track of where we are; push on each element name as we hit it
-my @stack;
+my (@stack);
 my ($inTracks, $inPlaylists, $inMajorVersion, $inMinorVersion,
         $inApplicationVersion, $inFeatures, $inMusicFolder,
         $inLibraryPersistentID) = undef;
@@ -76,9 +77,6 @@ sub parse {
 sub start_element {
     my ($expat, $element, %attrs) = @_;
 
-    # Don't deal with playlists yet
-    return if ($inPlaylists);
-    
     # Keep a trail of our depth
     push @stack, $element;
     my $depth = scalar(@stack);
@@ -91,21 +89,26 @@ sub start_element {
         }
     } elsif ( $depth == 2 ) {
     } elsif ( $depth == 3 ) {
-        if (($element eq 'true') or ($element eq 'false')) {
-            $library->showContentRatings($element);
+        if( $inPlaylists ){
+        } else {
+            if (($element eq 'true') or ($element eq 'false')) {
+                $library->showContentRatings($element);
+            }
         }
     } elsif ( $depth == 4 ) {
         # We hit a new item in the XML; create a new object
-        $item = Mac::iTunes::Library::Item->new() if ($element eq 'dict');
+        if( $inPlaylists ){
+            $item = Mac::iTunes::Library::Playlist->new() if ($element eq 'dict');
+        } else {
+            $item = Mac::iTunes::Library::Item->new() if ($element eq 'dict');
+        }
+    } elsif( $depth == 5 ){
     }
 } #start_element
 
 ### Parser end element
 sub end_element {
     my ($expat, $element) = @_;
-
-    # Don't deal with playlists yet
-    return if ($inPlaylists);
 
     # Prune the trail
     my $depth = scalar(@stack);
@@ -126,18 +129,41 @@ sub end_element {
         }
     } elsif ( $depth == 4 ) {
         # Ending an item; add it to the library and clean up
-        if ( $item ) {
-            $library->add($item);
+        if( $inPlaylists ){
+            if ( $item ) {
+                $library->addPlaylist($item);
+            }
+        } else {
+            if ( $item ) {
+                $library->add($item);
+            }
         }
 
         $item = undef if ($element eq 'dict');
     } elsif ( $depth == 5 ) {
         # Set the attributes of the Mac::iTunes::Library::Item directly
         if ( $element =~ /(integer|string|date)/ ) {
+            if( $inPlaylists ){
+                # print "$curKey = $characters\n";
+            }
             $item->{$curKey} = $characters;
             $characters = undef;
         } elsif ( $element =~ /true/ ) {
             $item->{$curKey} = 1;
+        }
+    } elsif ( $depth == 6 ){
+    } elsif ( $depth == 7 ){
+        if ( $element =~ /(integer)/ ) {
+            # print "Adding $curKey => $characters\n";
+
+            my $track = $library->{'ItemsById'}{$characters};
+            if( ref $track and $$track ){
+                $item->addItem( $$track );
+            } else {
+                warn "Couldn't find track '$characters'\n";
+            }
+
+            $characters = undef;
         }
     }
 } #end_element
@@ -146,8 +172,6 @@ sub end_element {
 sub characters {
     my ($expat, $string) = @_;
     my $depth = scalar(@stack);
-
-    return if ($inPlaylists);
 
     if ( $depth == 0 ) {        # plist version
     } elsif ( $depth == 1 ) {   # dict
@@ -203,6 +227,15 @@ sub characters {
             # Append it to the characters that we've gathered so far
             $characters .= $string;
         }
+    } elsif ( $depth == 6 ) {
+    } elsif ( $depth == 7 ) {
+        if ( $stack[$#stack] eq 'key' ) {
+            # Grab the key's name; always comes in a single chunk
+            $curKey = $string;
+        } elsif ( $stack[$#stack] =~ /(integer|string|date)/ ) {
+            # Append it to the characters that we've gathered so far
+            $characters .= $string;
+        }
     }
 } #characters
 
@@ -221,6 +254,10 @@ L<Mac::iTunes::Library::Playlist>
 =head1 AUTHOR
 
 Drew Stephens <drew@dinomite.net>, http://dinomite.net
+
+=head1 CONTRIBUTORS
+
+Mark Grimes <mgrimes@cpan.org>, http://www.peculiarities.com
 
 =head1 SOURCE REPOSITORY
 

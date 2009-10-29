@@ -4,6 +4,10 @@
 
 Revision history for Perl extension Mac::iTunes::Library
 
+0.6   28 Oct 2009
+    - Added playlist parsing patch from Mark Grimes <mgrimes@cpan.org>
+        https://rt.cpan.org/Public/Bug/Display.html?id=50668
+
 0.5   03 May 2009
     - Reorganized constructor in Item.pm
     - Added support for Skip Count, Skip Date, Album Rating,
@@ -23,18 +27,18 @@ Revision history for Perl extension Mac::iTunes::Library
     - SVN keywords stuff
 
 0.10  08 May 2008
-	-Added Playlist object
-	-Re-wrote POD in all files 
+    -Added Playlist object
+    -Re-wrote POD in all files 
 
 0.02  Wed Apr  7 00:00:47 2008
-	-Added plist version
-	-Added the rest of the top-level library attributes
-		-Major, Minor, Application Versions
-		-Features
-		-Show Content Ratings
-		-Music Folder
-		-Library Persistent ID
+    -Added plist version
+    -Added the rest of the top-level library attributes
+        -Major, Minor, Application Versions
+        -Features
+        -Show Content Ratings
+        -Music Folder
+        -Library Persistent ID
 
 0.01  Sun Oct  7 00:00:47 2007
-	- original version; created by h2xs 1.23 with options
-		-XAn Mac::iTunes::Item
+    - original version; created by h2xs 1.23 with options
+        -XAn Mac::iTunes::Item
