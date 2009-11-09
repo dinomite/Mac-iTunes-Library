@@ -4,7 +4,6 @@ use 5.006;
 use warnings;
 use strict;
 use Carp;
-use Switch;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -12,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.6';
+our $VERSION = '0.6.1';
 
 =head1 NAME
 
@@ -134,44 +133,36 @@ sub new {
     foreach my $param (keys %params) {
         next unless (defined $param);
 
-        switch ($param) {
-            case 'Track ID' { trackID($self, $params{'Track ID'}) }
-            case 'Name' { name($self, $params{'Name'}) }
-            case 'Artist' { artist($self, $params{'Artist'}) }
-            case 'Album Artist' { albumArtist($self, $params{'Album Artist'}) }
-            case 'Composer' { composer($self, $params{'Composer'}) }
-            case 'Album' { album($self, $params{'Album'}) }
-            case 'Genre' { genre($self, $params{'Genre'}) }
-            case 'Kind' { kind($self, $params{'Kind'}) }
-            case 'Size' { size($self, $params{'Size'}) }
-            case 'Total Time' { totalTime($self, $params{'Total Time'}) }
-            case 'Year' { year($self, $params{'Year'}) }
-            case 'Date Modified' {
-                   dateModified($self, $params{'Date Modified'}) }
-            case 'Date Added' { dateAdded($self, $params{'Date Added'}) }
-            case 'Bit Rate' { bitRate($self, $params{'Bit Rate'}) }
-            case 'Sample Rate' { sampleRate($self, $params{'Sample Rate'}) }
-            case 'Play Count' { playCount($self, $params{'Play Count'}) }
-            case 'Play Date' { playDate($self, $params{'Play Date'}) }
-            case 'Play Date UTC' {
-                   playDateUTC($self, $params{'Play Date UTC'}) }
-            case 'Skip Count' { skipCount($self, $params{'Skip Count'}) }
-            case 'Skip Date' { skipDate($self, $params{'Skip Date'}) }
-            case 'Rating' { rating($self, $params{'Rating'}) }
-            case 'Album Rating' { albumRating($self, $params{'Album Rating'}) }
-            case 'Album Rating Computed' {
-                    albumRatingComputed($self, $params{'Album Rating Computed'}) }
-            case 'Compilation' { compilation($self, $params{'Compilation'}) }
-            case 'Persistent ID' {
-                   persistentID($self, $params{'Persistent ID'}) }
-            case 'Track Type' { trackType($self, $params{'Track Type'}) }
-            case 'Location' { location($self, $params{'Location'}) }
-            case 'File Folder Count' {
-                   fileFolderCount($self, $params{'File Folder Count'}) }
-            case 'Library Folder Count' {
-                    libraryFolderCount($self, $params{'Library Folder Count'}) }
-            else {print "Param that I can't handle: $param\n"}
-        }
+        if ($param eq 'Track ID') { trackID($self, $params{'Track ID'}) }
+        elsif ($param eq 'Name') { name($self, $params{'Name'}) }
+        elsif ($param eq 'Artist') { artist($self, $params{'Artist'}) }
+        elsif ($param eq 'Album Artist') { albumArtist($self, $params{'Album Artist'}) }
+        elsif ($param eq 'Composer') { composer($self, $params{'Composer'}) }
+        elsif ($param eq 'Album') { album($self, $params{'Album'}) }
+        elsif ($param eq 'Genre') { genre($self, $params{'Genre'}) }
+        elsif ($param eq 'Kind') { kind($self, $params{'Kind'}) }
+        elsif ($param eq 'Size') { size($self, $params{'Size'}) }
+        elsif ($param eq 'Total Time') { totalTime($self, $params{'Total Time'}) }
+        elsif ($param eq 'Year') { year($self, $params{'Year'}) }
+        elsif ($param eq 'Date Modified') { dateModified($self, $params{'Date Modified'}) }
+        elsif ($param eq 'Date Added') { dateAdded($self, $params{'Date Added'}) }
+        elsif ($param eq 'Bit Rate') { bitRate($self, $params{'Bit Rate'}) }
+        elsif ($param eq 'Sample Rate') { sampleRate($self, $params{'Sample Rate'}) }
+        elsif ($param eq 'Play Count') { playCount($self, $params{'Play Count'}) }
+        elsif ($param eq 'Play Date') { playDate($self, $params{'Play Date'}) }
+        elsif ($param eq 'Play Date UTC') { playDateUTC($self, $params{'Play Date UTC'}) }
+        elsif ($param eq 'Skip Count') { skipCount($self, $params{'Skip Count'}) }
+        elsif ($param eq 'Skip Date') { skipDate($self, $params{'Skip Date'}) }
+        elsif ($param eq 'Rating') { rating($self, $params{'Rating'}) }
+        elsif ($param eq 'Album Rating') { albumRating($self, $params{'Album Rating'}) }
+        elsif ($param eq 'Album Rating Computed') { albumRatingComputed($self, $params{'Album Rating Computed'}) }
+        elsif ($param eq 'Compilation') { compilation($self, $params{'Compilation'}) }
+        elsif ($param eq 'Persistent ID') { persistentID($self, $params{'Persistent ID'}) }
+        elsif ($param eq 'Track Type') { trackType($self, $params{'Track Type'}) }
+        elsif ($param eq 'Location') { location($self, $params{'Location'}) }
+        elsif ($param eq 'File Folder Count') { fileFolderCount($self, $params{'File Folder Count'}) }
+        elsif ($param eq 'Library Folder Count') { libraryFolderCount($self, $params{'Library Folder Count'}) }
+        else { print "Param that I can't handle: $param\n" }
     }
 
     return $self;

@@ -4,6 +4,10 @@
 
 Revision history for Perl extension Mac::iTunes::Library
 
+0.6   08 Nov 2009
+    - Get rid of Switch, which displeased CPANTesters
+        http://stackoverflow.com/questions/844616
+
 0.6   28 Oct 2009
     - Added playlist parsing patch from Mark Grimes <mgrimes@cpan.org>
         https://rt.cpan.org/Public/Bug/Display.html?id=50668
