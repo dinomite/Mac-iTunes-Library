@@ -22,11 +22,6 @@ BEGIN { use_ok('Mac::iTunes::Library::XML') };
 
 my $lib = Mac::iTunes::Library::XML->parse('t/iTunes_Music_Library.xml');
 
-use Data::Dump;
-
-# dd $lib;
-# dd $lib->playlists;
-
 my %playlists = $lib->playlists;
 is( scalar keys %playlists, 2, 'playlist count' );
 my $playlist = $playlists{10073};

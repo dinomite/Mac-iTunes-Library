@@ -4,7 +4,11 @@
 
 Revision history for Perl extension Mac::iTunes::Library
 
-0.6   08 Nov 2009
+0.62  08 Nov 2009
+    - Get rid of Data::Dump rather than declaring a dependency, since it is
+        only used for development; RT #51029
+
+0.61  08 Nov 2009
     - Get rid of Switch, which displeased CPANTesters
         http://stackoverflow.com/questions/844616
 
