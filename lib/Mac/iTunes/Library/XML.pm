@@ -148,8 +148,10 @@ sub end_element {
             }
             $item->{$curKey} = $characters;
             $characters = undef;
+            $curKey = undef;
         } elsif ( $element =~ /true/ ) {
             $item->{$curKey} = 1;
+            $curKey = undef;
         }
     } elsif ( $depth == 6 ){
     } elsif ( $depth == 7 ){
@@ -221,8 +223,8 @@ sub characters {
     } elsif ( $depth == 4 ) {
     } elsif ( $depth == 5 ) {
         if ( $stack[$#stack] eq 'key' ) {
-            # Grab the key's name; always comes in a single chunk
-            $curKey = $string;
+            # Grab the key's name; Normally comes in a single chunk, but accept multiple chunks
+            $curKey .= $string;
         } elsif ( $stack[$#stack] =~ /(integer|string|date)/ ) {
             # Append it to the characters that we've gathered so far
             $characters .= $string;
@@ -230,8 +232,8 @@ sub characters {
     } elsif ( $depth == 6 ) {
     } elsif ( $depth == 7 ) {
         if ( $stack[$#stack] eq 'key' ) {
-            # Grab the key's name; always comes in a single chunk
-            $curKey = $string;
+            # Grab the key's name; Normally comes in a single chunk, but accept multiple chunks
+            $curKey .= $string;
         } elsif ( $stack[$#stack] =~ /(integer|string|date)/ ) {
             # Append it to the characters that we've gathered so far
             $characters .= $string;
