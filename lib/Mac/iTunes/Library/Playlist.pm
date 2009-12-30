@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.62';
+our $VERSION = '0.7';
 
 =head1 NAME
 
@@ -73,9 +73,7 @@ None by default.
 
 =head1 METHODS
 
-=over 4
-
-=item new()
+=head2 new()
 
 Creates a new Mac::iTunes::Playlist object that can store all of the data of an
 iTunes library playlist.
@@ -159,7 +157,7 @@ sub DESTROY {
 # Nothing to do.
 } #DESTROY
 
-=item name( name )
+=head2 name( name )
 
 Get/set the name attribute for this playlist.
 
@@ -176,7 +174,7 @@ sub name {
     return $self->{'Name'};
 } #name
 
-=item playlistID( id )
+=head2 playlistID( id )
 
 Get/set the Playlist ID attribute for this playlist.
 
@@ -193,7 +191,7 @@ sub playlistID {
     return $self->{'Playlist ID'};
 } #playlistID
 
-=item playlistPersistenID( id )
+=head2 playlistPersistenID( id )
 
 Get/set the Playlist Persistent ID attribute for this playlist.
 
@@ -210,7 +208,7 @@ sub playlistPersistentID {
     return $self->{'Playlist Persistent ID'};
 } #playlistPersistentID
 
-=item allItems( 0|1 )
+=head2 allItems( 0|1 )
 
 Get/set the All Items attribute for this playlist.
 
@@ -228,7 +226,7 @@ sub allItems {
     return $self->{'All Items'};
 } #allItems
 
-=item smartInfo( smartInfo )
+=head2 smartInfo( smartInfo )
 
 Get/set the Smart Info attribute for this playlist.
 
@@ -245,7 +243,7 @@ sub smartInfo {
     return $self->{'Smart Info'};
 } #smartInfo
 
-=item smartCriteria( smartInfo )
+=head2 smartCriteria( smartInfo )
 
 Get/set the Smart Criteria attribute for this playlist.
 
@@ -262,7 +260,7 @@ sub smartCriteria {
     return $self->{'Smart Criteria'};
 } #smartCriteria
 
-=item num()
+=head2 num()
 
 Get the number of elements in this playlist.
 
@@ -274,7 +272,7 @@ sub num {
     return scalar(@{$self->{'items'}});
 } #num
 
-=item addItem( Mac::iTunes::Library::Item )
+=head2 addItem( Mac::iTunes::Library::Item )
 
 Add an item to this playlist; duplicates are allowed
 
@@ -291,7 +289,7 @@ sub addItem {
     # TODO: shouldn't this be referencing a track already in the lib?
 } #addItem
 
-=item addItems( Mac::iTunes::Library::Item )
+=head2 addItems( Mac::iTunes::Library::Item )
 
 Add an array of items to this playlist; duplicates are allowed
 
@@ -310,7 +308,7 @@ sub addItems {
     push @{$self->{'items'}}, @{$items};
 } #addItems
 
-=item items()
+=head2 items()
 
 Get an array of the items in the playlist.
 
@@ -322,7 +320,7 @@ sub items {
     return @{$self->{'items'}};
 } #items
 
-=item item( trackID )
+=head2 item( trackID )
 
 Get an item by it's trackID
 
@@ -331,7 +329,7 @@ Get an item by it's trackID
 sub item {
     my $self = shift;
     my $id = shift;
-    
+
     # There may be duplicates
     my @items = grep {$_->trackID() == $id} @{$self->{'items'}};
 

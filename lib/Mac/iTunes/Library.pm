@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.62';
+our $VERSION = '0.7';
 
 =head1 NAME
 
@@ -47,9 +47,7 @@ None by default.
 
 =head1 METHODS
 
-=over 4
-
-=item new()
+=head2 new()
 
 Creates a new Mac::iTunes::Library object that can store
 Mac::iTunes::Library::Item objects.
@@ -82,7 +80,7 @@ sub DESTROY {
     # Nothing to do.
 } #DESTROY
 
-=item version()
+=head2 version()
 
 Get/set the plist version number.
 
@@ -98,7 +96,7 @@ sub version {
     }
 } #version
 
-=item majorVersion()
+=head2 majorVersion()
 
 Get/set the Major Version number
 
@@ -114,7 +112,7 @@ sub majorVersion {
     }
 } #majorVersion
 
-=item minorVersion()
+=head2 minorVersion()
 
 Get/set the Minor Version number
 
@@ -130,7 +128,7 @@ sub minorVersion {
     }
 } #minorVersion
 
-=item applicationVersion()
+=head2 applicationVersion()
 
 Get/set the Application Version number
 
@@ -146,7 +144,7 @@ sub applicationVersion {
     }
 } #applicationVersion
 
-=item features()
+=head2 features()
 
 Get/set the Features attribute
 
@@ -162,7 +160,7 @@ sub features {
     }
 } #features
 
-=item showContentRatings()
+=head2 showContentRatings()
 
 Get/set the Show Content Ratings attribute
 
@@ -178,7 +176,7 @@ sub showContentRatings {
     }
 } #showContentRatings
 
-=item musicFolder()
+=head2 musicFolder()
 
 Get/set the Music Folder attribute
 
@@ -194,7 +192,7 @@ sub musicFolder {
     }
 } #musicFolder
 
-=item libraryPersistentID()
+=head2 libraryPersistentID()
 
 Get/set the Library Persistent ID
 
@@ -210,7 +208,7 @@ sub libraryPersistentID {
     }
 } #libraryPersistentID
 
-=item num()
+=head2 num()
 
 Get the number of tracks in the library
 
@@ -227,7 +225,7 @@ sub _num {
     $self->{'Num'} += 1;
 } #_num
 
-=item size()
+=head2 size()
 
 Get the total size of the library
 
@@ -246,7 +244,7 @@ sub _size {
     $self->{'Size'} += $num;
 } #_size
 
-=item time()
+=head2 time()
 
 Get the total time of the library
 
@@ -265,7 +263,7 @@ sub _time {
     $self->{'Time'} += $time if (defined $time);
 } #_time
 
-=item artist()
+=head2 artist()
 
 Get the hash of the number of tracks for each artist.
 
@@ -285,7 +283,7 @@ sub _artist {
     $self->{'Artist'}{ $artist } += 1;
 } #_artist
 
-=item partist()
+=head2 partist()
 
 Get the hash of the number of plays (playcount) for each artist.
 
@@ -306,7 +304,7 @@ sub _partist {
     $self->{'PArtists'}{ $artist } += $num;
 } #_partist
 
-=item albumArtist()
+=head2 albumArtist()
 
 Get the hash of the number of tracks for each albumArtist.
 
@@ -326,7 +324,7 @@ sub _albumArtist {
     $self->{'AlbumArtist'}{ $albumArtist } += 1;
 } #_albumArtist
 
-=item palbumArtist()
+=head2 palbumArtist()
 
 Get the hash of the number of plays (playcount) for each albumArtist.
 
@@ -347,7 +345,7 @@ sub _palbumArtist {
     $self->{'PAlbumArtists'}{ $albumArtist } += $num;
 } #_palbumArtist
 
-=item genre()
+=head2 genre()
 
 Get the hash of the number of tracks in each genre.
 
@@ -367,7 +365,7 @@ sub _genre {
     $self->{'Genre'}{ $genre } += 1;
 } #_genre
 
-=item pgenre()
+=head2 pgenre()
 
 Get the hash of the number of plays (playcount) for each genre.
 
@@ -388,7 +386,7 @@ sub _pgenre {
     $self->{'PGenre'}{ $genre } += $num;
 } #_pgenre
 
-=item type()
+=head2 type()
 
 Get the hash of item types in the library
 
@@ -407,27 +405,33 @@ sub _type {
     $self->{'Type'}{ $type } += 1;
 } #_type
 
-=item items()
+=head2 items()
 
 Get the hash of Items (Artist->Name->[item, item]) contained in the library;
 artist names are the top level keys; accessing one gives you a hash-ref with
 keys of song names and array-refs as values.  Those array-refs contain
-Mac::iTunes::Library::Item objects.  Example traversal:
+Mac::iTunes::Library::Item objects.
 
-# Assuming a previously created library
-%items = $library->items();
-foreach my $artist (keys %items) {
-    my $artistSongs = $items{$artist};
+=over 4
 
-    foreach my $songName (keys %$artistSongs) {
-        my $artistSongItems = $artistSongs->{$songName};
+=item Example traversal:
 
-        foreach my $item (@$artistSongItems) {
-            # Do something here to every item in the library
-            print $song->name() . "\n";
-        }
-    }
-}
+  # Assuming a previously created library
+  %items = $library->items();
+  foreach my $artist (keys %items) {
+      my $artistSongs = $items{$artist};
+
+      foreach my $songName (keys %$artistSongs) {
+          my $artistSongItems = $artistSongs->{$songName};
+
+          foreach my $item (@$artistSongItems) {
+              # Do something here to every item in the library
+              print $song->name() . "\n";
+          }
+      }
+  }
+
+=back
 
 =cut
 
@@ -464,7 +468,7 @@ sub _item {
 
 } #_item
 
-=item add( Mac::iTunes::Library::Item )
+=head2 add( Mac::iTunes::Library::Item )
 
 Add an item to the library
 
@@ -530,6 +534,8 @@ Drew Stephens <drew@dinomite.net>, http://dinomite.net
 =head1 CONTRIBUTORS
 
 Mark Grimes <mgrimes@cpan.org>, http://www.peculiarities.com
+Scott Lawrence (http://linkedin.com/in/scottdlawrence)
+Garrett Scott <garrett@gothik.org>, (http://www.gothik.org)
 
 =head1 SOURCE REPOSITORY
 

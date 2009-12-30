@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.62';
+our $VERSION = '0.7';
 
 =head1 NAME
 
@@ -44,9 +44,7 @@ None by default.
 
 =head1 METHODS
 
-=over 4
-
-=item new()
+=head2 new()
 
 Creates a new Mac::iTunes::Library::Item object that can store all of the data
 of an iTunes library item.
@@ -173,7 +171,7 @@ sub DESTROY {
 # Nothing to do.
 } #DESTROY
 
-=item trackID( $id )
+=head2 trackID( $id )
 
 Get/set the Track ID attribute for this item.
 
@@ -204,7 +202,7 @@ sub name {
     return $self->{'Name'};
 } #name
 
-=item artist( $artist )
+=head2 artist( $artist )
 
 Get/set the Artist attribute for this item.
 
@@ -222,7 +220,7 @@ sub artist {
     return $self->{'Artist'};
 } #artist
 
-=item albumArtist( $albumArtist )
+=head2 albumArtist( $albumArtist )
 
 Get/set the Album Artist attribute for this item.
 
@@ -241,7 +239,7 @@ sub albumArtist {
     return $self->{'Album Artist'};
 } #albumArtist
 
-=item composer( $composer )
+=head2 composer( $composer )
 
 Get/set the Composer attribute for this item.
 
@@ -260,7 +258,7 @@ sub composer {
     return $self->{'Composer'};
 } #composer
 
-=item album( $album )
+=head2 album( $album )
 
 Get/set the Album attribute for this item.
 
@@ -278,7 +276,7 @@ sub album {
     return $self->{'Album'};
 } #album
 
-=item genre( $genre )
+=head2 genre( $genre )
 
 Get/set the Genre attribute for this item.
 
@@ -296,7 +294,7 @@ sub genre {
     return $self->{'Genre'};
 } #genre
 
-=item kind( $kind )
+=head2 kind( $kind )
 
 Get/set the Kind ("MPEG audio file", etc.) attribute for this item.
 
@@ -315,7 +313,7 @@ sub kind {
     return $self->{'Kind'};
 } #kind
 
-=item size( $size )
+=head2 size( $size )
 
 Get/set the Size attribute for this item.
 
@@ -333,7 +331,7 @@ sub size {
     return $self->{'Size'};
 } #size
 
-=item totalTime( $totalTime )
+=head2 totalTime( $totalTime )
 
 Get/set the Total Time attribute for this item.
 
@@ -352,7 +350,7 @@ sub totalTime {
     return $self->{'Total Time'};
 } #totalTime
 
-=item year( $year )
+=head2 year( $year )
 
 Get/set the Year attribute for this item.
 
@@ -370,7 +368,7 @@ sub year {
     return $self->{'Year'};
 } #year
 
-=item dateModified( $dateModified )
+=head2 dateModified( $dateModified )
 
 Get/set the Date Modified attribute for this item.
 
@@ -389,7 +387,7 @@ sub dateModified {
     return $self->{'Date Modified'};
 } #dateModified
 
-=item dateAdded( $dateAdded )
+=head2 dateAdded( $dateAdded )
 
 Get/set the Date Added attribute for this item.
 
@@ -408,7 +406,7 @@ sub dateAdded {
     return $self->{'Date Added'};
 } #dateAdded
 
-=item bitRate( $bitRate )
+=head2 bitRate( $bitRate )
 
 Get/set the Date Added attribute for this item.
 
@@ -427,7 +425,7 @@ sub bitRate {
     return $self->{'Bit Rate'};
 } #bitRate
 
-=item sampleRate( $sampleRate )
+=head2 sampleRate( $sampleRate )
 
 Get/set the Sample Rate attribute for this item.
 
@@ -446,7 +444,7 @@ sub sampleRate {
     return $self->{'Sample Rate'};
 } #sampleRate
 
-=item playCount( $playCount )
+=head2 playCount( $playCount )
 
 Get/set the Play Count attribute for this item.
 
@@ -465,7 +463,7 @@ sub playCount {
     return $self->{'Play Count'};
 } #playCount
 
-=item playDate( $playDate )
+=head2 playDate( $playDate )
 
 Get/set the Play Date attribute for this item.
 
@@ -484,7 +482,7 @@ sub playDate {
     return $self->{'Play Date'};
 } #playDate
 
-=item playDateUTC( $playDateUTC )
+=head2 playDateUTC( $playDateUTC )
 
 Get/set the Play Date UTC attribute for this item.
 
@@ -503,7 +501,7 @@ sub playDateUTC {
     return $self->{'Play Date UTC'};
 } #playDateUTC
 
-=item skipCount( $skipCount )
+=head2 skipCount( $skipCount )
 
 Get/set the Skip Count attribute for this item.
 
@@ -522,7 +520,7 @@ sub skipCount {
     return $self->{'Skip Count'};
 } #skipCount
 
-=item skipDate( $skipDate )
+=head2 skipDate( $skipDate )
 
 Get/set the Skip Date attribute for this item.
 
@@ -541,7 +539,7 @@ sub skipDate {
     return $self->{'Skip Date'};
 } #skipDate
 
-=item rating( $rating )
+=head2 rating( $rating )
 
 Get/set the Rating attribute for this item.
 
@@ -560,7 +558,7 @@ sub rating {
     return $self->{'Rating'};
 } #rating
 
-=item albumRating( $albumRating )
+=head2 albumRating( $albumRating )
 
 Get/set the Album Rating attribute for this item.
 
@@ -579,7 +577,7 @@ sub albumRating {
     return $self->{'Album Rating'};
 } #albumRating
 
-=item albumRatingComputed( $albumRatingComputed )
+=head2 albumRatingComputed( $albumRatingComputed )
 
 Get/set the Album Rating Computed attribute for this item.
 
@@ -596,7 +594,7 @@ sub albumRatingComputed {
     return $self->{'Album Rating Computed'};
 } #albumRatingComputed
 
-=item compilation( $albumRatingComputed )
+=head2 compilation( $albumRatingComputed )
 
 Get/set the Compilation attribute for this item.
 
@@ -613,7 +611,7 @@ sub compilation {
     return $self->{'Compilation'};
 } #compilation
 
-=item persistentID( $persistentID )
+=head2 persistentID( $persistentID )
 
 Get/set the Persistent ID attribute for this item.
 
@@ -632,7 +630,7 @@ sub persistentID {
     return $self->{'Persistent ID'};
 } #persistentID
 
-=item trackType( $trackType )
+=head2 trackType( $trackType )
 
 Get/set the Track Type attribute for this item.
 
@@ -651,7 +649,7 @@ sub trackType {
     return $self->{'Track Type'};
 } #trackType
 
-=item location( $location )
+=head2 location( $location )
 
 Get/set the Location attribute for this item.
 
@@ -670,7 +668,7 @@ sub location {
     return $self->{'Location'};
 } #location
 
-=item fileFolderCount( $fileFolderCount )
+=head2 fileFolderCount( $fileFolderCount )
 
 Get/set the File Folder Count attribute for this item.
 
@@ -689,7 +687,7 @@ sub fileFolderCount {
     return $self->{'File Folder Count'};
 } #fileFolderCount
 
-=item libraryFolderCount( $libraryFolderCount )
+=head2 libraryFolderCount( $libraryFolderCount )
 
 Get/set the Library Folder Count attribute for this item.
 

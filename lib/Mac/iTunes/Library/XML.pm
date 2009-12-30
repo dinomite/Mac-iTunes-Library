@@ -16,7 +16,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.62';
+our $VERSION = '0.7';
 
 =head1 NAME
 
@@ -39,7 +39,7 @@ None by default.
 
 =head1 METHODS
 
-=item parse( $libraryFile )
+=head2 parse( $libraryFile )
 
 Parses an iTunes XML library and returns a Mac::iTunes::Library object.
 
@@ -260,6 +260,7 @@ Drew Stephens <drew@dinomite.net>, http://dinomite.net
 =head1 CONTRIBUTORS
 
 Mark Grimes <mgrimes@cpan.org>, http://www.peculiarities.com
+Garrett Scott <garrett@gothik.org>, http://www.gothik.org
 
 =head1 SOURCE REPOSITORY
 
