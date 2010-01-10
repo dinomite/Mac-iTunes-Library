@@ -12,7 +12,7 @@ $Author$
 #########################
 use lib ".";
 use 5;
-use Test::More tests => 32;
+use Test::More tests => 33;
 BEGIN { use_ok('Mac::iTunes::Library::Item') };
 #########################
 
@@ -24,6 +24,7 @@ my %values = (
     'Album Artist' => 'Album Artist Name',
     'Composer' => 'Composer Name',
     'Album' => 'Album Name',
+    'Grouping' => 'Grouping Name',
     'Genre' => 'Genre Name',
     'Kind' => 'MPEG audio file',
     'Size' => 31337,
@@ -63,6 +64,7 @@ is($item->artist(), $values{'Artist'}, 'Get Artist');
 is($item->albumArtist(), $values{'Album Artist'}, 'Get Album Artist');
 is($item->composer(), $values{'Composer'}, 'Get Composer');
 is($item->album(), $values{'Album'}, 'Get Album');
+is($item->grouping(), $values{'Grouping'}, 'Get Grouping');
 is($item->genre(), $values{'Genre'}, 'Get Genre');
 is($item->kind(), $values{'Kind'}, 'Get Kind');
 is($item->size(), $values{'Size'}, 'Get Size');

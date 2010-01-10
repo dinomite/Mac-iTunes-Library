@@ -61,6 +61,7 @@ an item
         'Album Artist' => 'blink-182',
         'Composer' => 'blink-182',
         'Album' => 'Dude Ranch',
+        'Grouping' => 'Alternative Rock, 00s Rock'
         'Genre' => 'Pop Punk',
         'Kind' => 'MPEG audio file',
         'Size' => 31337,
@@ -100,6 +101,7 @@ sub new {
         'Album Artist' => undef,
         'Composer' => undef,
         'Album' => undef,
+        'Grouping' => undef,
         'Genre' => undef,
         'Kind' => undef,
         'Size' => undef,
@@ -137,6 +139,7 @@ sub new {
         elsif ($param eq 'Album Artist') { albumArtist($self, $params{'Album Artist'}) }
         elsif ($param eq 'Composer') { composer($self, $params{'Composer'}) }
         elsif ($param eq 'Album') { album($self, $params{'Album'}) }
+        elsif ($param eq 'Grouping') { grouping($self, $params{'Grouping'}) }
         elsif ($param eq 'Genre') { genre($self, $params{'Genre'}) }
         elsif ($param eq 'Kind') { kind($self, $params{'Kind'}) }
         elsif ($param eq 'Size') { size($self, $params{'Size'}) }
@@ -275,6 +278,29 @@ sub album {
 
     return $self->{'Album'};
 } #album
+
+=head2 grouping( $grouping )
+
+Get/set the Grouping attribute for this item.
+
+Note: Grouping is intended to be used as a collection of music items below
+the level of an album (such as on a classical music release) where items
+are individual movements of a larger work.  They are more commonly
+used as a comma delimited list of tags to build smart playlists.
+
+=cut
+
+sub grouping {
+    my $self = shift;
+
+    if (@_) {
+        my $grouping = shift;
+        return carp "$grouping isn't a valid Grouping" unless ($grouping =~ /.*/);
+        $self->{'Grouping'} = $grouping;
+    }
+
+    return $self->{'Grouping'};
+} #grouping
 
 =head2 genre( $genre )
 
@@ -733,6 +759,10 @@ L<Mac::iTunes::Library::XML>
 =head1 AUTHOR
 
 Drew Stephens <drew@dinomite.net>, http://dinomite.net
+
+=head1 CONTRIBUTORS
+
+Mark Allen <mrallen1@yahoo.com>
 
 =head1 SOURCE REPOSITORY
 
