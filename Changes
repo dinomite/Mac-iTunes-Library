@@ -4,6 +4,15 @@
 
 Revision history for Perl extension Mac::iTunes::Library
 
+0.71  09 Jan 2010
+    - Add support for the "grouping" element in the XML file.
+        Patch submitted by Mark Allen
+        RT #53553 (https://rt.cpan.org/Public/Bug/Display.html?id=53553)
+
+0.70  30 Dec 2009
+    - Handle charachter sequences that come to the callback as multiple chunks.
+        Patch submitted by Garrett Scott.
+
 0.62  08 Nov 2009
     - Get rid of Data::Dump rather than declaring a dependency, since it is
         only used for development; RT #51029
