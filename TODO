@@ -4,4 +4,3 @@
 
 - Handle parameters that don't have specific methosd in Item.pm
 - Better date checking
-- Playlist support

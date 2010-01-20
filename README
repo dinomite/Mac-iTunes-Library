@@ -1,4 +1,4 @@
-Mac-iTunes version 0.71
+Mac-iTunes version 0.8
 ==========================
 
 A representation of an iTunes library.
@@ -22,7 +22,7 @@ SOURCE
 
 DEPENDENCIES
 
-	XML::Parser
+    XML::Parser
 
 SVN INFO
 

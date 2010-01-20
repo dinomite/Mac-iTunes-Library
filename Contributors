@@ -12,7 +12,9 @@ Garrett Scott <garrett@gothik.org> (http://www.gothik.org)
     Item as well, to handle all values.
   - Fixed the handling of character sequences in XML parsing. (r77)
 
-
 Mark Grimes <mgrimes@cpan.org> (http://www.peculiarities.com)
   - Parsing playlists from the XML file
     https://rt.cpan.org/Ticket/Display.html?id=50668
+
+Steven Scholnick <steve@scholnick.net> (http://www.scholnick.net)
+  - Reported bug in playlist parsing, fixed in 0.80

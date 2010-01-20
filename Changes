@@ -4,9 +4,14 @@
 
 Revision history for Perl extension Mac::iTunes::Library
 
+0.8   20 Jan 2010
+    - Fixed playlist parsing to properly grab Smart Playlist information
+        and all playlist metadata.
+        Bug reported by Steve Scholnick.
+
 0.71  09 Jan 2010
     - Add support for the "grouping" element in the XML file.
-        Patch submitted by Mark Allen
+        Patch submitted by Mark Allen.
         RT #53553 (https://rt.cpan.org/Public/Bug/Display.html?id=53553)
 
 0.70  30 Dec 2009
