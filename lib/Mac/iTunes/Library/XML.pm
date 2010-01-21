@@ -5,7 +5,6 @@ use warnings;
 use strict;
 use Carp;
 
-use Data::Dumper;
 use Mac::iTunes::Library;
 use Mac::iTunes::Library::Item;
 use Mac::iTunes::Library::Playlist;
@@ -185,30 +184,31 @@ sub start_element {
 
     # Keep a trail of our depth
     push @stack, $element;
+    # Note that our $depth is inside of the newly opened element
     my $depth = scalar(@stack);
 
-    if ( $depth == 0 ) {
-    } elsif ( $depth == 1 ) {
+    if ($depth == 0) {
+    } elsif ($depth == 1) {
         # Hit the initial <plist version=""> tag
         if (defined $attrs{'version'}) {
             $library->version($attrs{'version'});
         }
-    } elsif ( $depth == 2 ) {
-    } elsif ( $depth == 3 ) {
-        if( $inPlaylists ){
+    } elsif ($depth == 2) {
+    } elsif ($depth == 3) {
+        if($inPlaylists) {
         } else {
             if (($element eq 'true') or ($element eq 'false')) {
                 $library->showContentRatings($element);
             }
         }
-    } elsif ( $depth == 4 ) {
+    } elsif ($depth == 4) {
         # We hit a new item in the XML; create a new object
-        if( $inPlaylists ){
+        if($inPlaylists) {
             $item = Mac::iTunes::Library::Playlist->new() if ($element eq 'dict');
         } else {
             $item = Mac::iTunes::Library::Item->new() if ($element eq 'dict');
         }
-    } elsif( $depth == 5 ){
+    } elsif($depth == 5){
     }
 } #start_element
 
@@ -216,14 +216,15 @@ sub start_element {
 sub end_element {
     my ($expat, $element) = @_;
 
-    # Prune the trail
+    # Note that our $depth is still "inside" this ending element
     my $depth = scalar(@stack);
+    # Hit a closing element; prune the trail
     pop @stack;
 
-    if ( $depth == 0 ) {        # plist version
-    } elsif ( $depth == 1 ) {   # dict
-    } elsif ( $depth == 2 ) {
-    } elsif ( $depth == 3 ) {
+    if ($depth == 0) {        # plist version
+    } elsif ($depth == 1) {   # dict
+    } elsif ($depth == 2) {
+    } elsif ($depth == 3) {
         # Exiting a major section
         $inTracks = 0 if ($element eq 'dict');
         $inPlaylists = 0 if ($element eq 'array');
@@ -231,23 +232,23 @@ sub end_element {
         if ($inMusicFolder and ($element eq 'string')) {
             $library->musicFolder($characters);
             $inMusicFolder = undef;
+            $curKey = undef;
             $characters = undef;
-            #TODO clear $curKey here?
         }
-    } elsif ( $depth == 4 ) {
+    } elsif ($depth == 4) {
         # Ending an item; add it to the library and clean up
         if( $inPlaylists ){
-            if ( $item ) {
+            if ($item) {
                 $library->addPlaylist($item);
             }
         } else {
-            if ( $item ) {
+            if ($item) {
                 $library->add($item);
             }
         }
 
         $item = undef if ($element eq 'dict');
-    } elsif ( $depth == 5 ) {
+    } elsif ($depth == 5) {
         # Set the attributes of the Mac::iTunes::Library::Item directly
         if ( $element =~ /(integer|string|date|data)/ ) {
             $item->{$curKey} = $characters;
@@ -260,8 +261,8 @@ sub end_element {
             $item->{$curKey} = 0;
             $curKey = undef;
         }
-    } elsif ( $depth == 6 ){
-    } elsif ( $depth == 7 ){
+    } elsif ($depth == 6){
+    } elsif ($depth == 7){
         if ( $element =~ /(integer)/ ) {
             # print "Adding $curKey => $characters\n";
 
@@ -276,8 +277,6 @@ sub end_element {
             $characters = undef;
         }
     }
-
-    #TODO should $curKey & $characters be cleared at every end_element() call?
 } #end_element
 
 ### Parser element contents
