@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.8';
+our $VERSION = '0.9';
 
 =head1 NAME
 
@@ -125,6 +125,8 @@ sub new {
         'Location' => undef,
         'File Folder Count' => undef,
         'Library Folder Count' => undef,
+        'Track Count'   => undef,
+        'Track Number'  => undef,
     };
 
     bless $self, $class;
@@ -163,6 +165,8 @@ sub new {
         elsif ($param eq 'Location') { location($self, $params{'Location'}) }
         elsif ($param eq 'File Folder Count') { fileFolderCount($self, $params{'File Folder Count'}) }
         elsif ($param eq 'Library Folder Count') { libraryFolderCount($self, $params{'Library Folder Count'}) }
+        elsif ($param eq 'Track Count') { trackCount($self, $params{'Track Count'}) }
+        elsif ($param eq 'Track Number') { trackNumber($self, $params{'Track Number'}) }
         else { print "Param that I can't handle: $param\n" }
     }
 
@@ -733,6 +737,46 @@ sub libraryFolderCount {
 } #libraryFolderCount
 
 
+=head2 trackCount( $trackCount )
+
+Get/set the Track Count attribute for this item.
+
+=cut
+
+sub trackCount {
+    my $self = shift;
+
+    if (@_) {
+        my $trackCount = shift;
+        return carp "$trackCount isn't a valid Track Count"
+                unless _checkNum($trackCount);
+        $self->{'Track Count'} = $trackCount;
+    }
+
+    return $self->{'Track Count'};
+} #trackCount
+
+
+=head2 trackNumber( $trackNumber )
+
+Get/set the Track Number attribute for this item.
+
+=cut
+
+sub trackNumber {
+    my $self = shift;
+
+    if (@_) {
+        my $trackNumber = shift;
+        return carp "$trackNumber isn't a valid Track Number"
+                unless _checkNum($trackNumber);
+        $self->{'Track Number'} = $trackNumber;
+    }
+
+    return $self->{'Track Number'};
+} #trackNumber
+
+
 ##### Support methods #####
 # Is it a number?
 sub _checkNum {
@@ -763,6 +807,7 @@ Drew Stephens <drew@dinomite.net>, http://dinomite.net
 =head1 CONTRIBUTORS
 
 Mark Allen <mrallen1@yahoo.com>
+Michael G Schwern <mschwern@cpan.org>
 
 =head1 SOURCE REPOSITORY
 

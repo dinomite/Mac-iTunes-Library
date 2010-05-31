@@ -4,7 +4,7 @@
 #########################
 use lib "./lib";
 use 5;
-use Test::More tests => 21;
+use Test::More tests => 23;
 BEGIN {
 	use_ok('Mac::iTunes::Library');
 	use_ok('Mac::iTunes::Library::Item');
@@ -47,3 +47,5 @@ is($items{'ATB'}{'Push the Limits'}[0]->persistentID(), 'DAC2FC501CCA2031',
 		'Item Persistent ID');
 is($items{'ATB'}{'Push the Limits'}[0]->libraryFolderCount(), '1',
 		'Item Library Folder Count');
+is($items{'Deep Forest'}{'Freedom Cry'}[0]->trackNumber, 8, 'Track Number');
+is($items{'Deep Forest'}{'Freedom Cry'}[0]->trackCount, 18, 'Track Count');

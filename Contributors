@@ -18,3 +18,7 @@ Mark Grimes <mgrimes@cpan.org> (http://www.peculiarities.com)
 
 Steven Scholnick <steve@scholnick.net> (http://www.scholnick.net)
   - Reported bug in playlist parsing, fixed in 0.80
+
+Michael G Schwern <mschwern@cpan.org> (http://schwern.dreamhosters.com)
+  - Added Track Count and Track Number to Item
+    https://rt.cpan.org/Public/Bug/Display.html?id=57673
