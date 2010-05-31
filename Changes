@@ -4,6 +4,11 @@
 
 Revision history for Perl extension Mac::iTunes::Library
 
+0.9   30 May 2010
+    - Integrated patch for trackCount and trackNumber provided by
+        Michael G Schwern.
+        RT #57673 https://rt.cpan.org/Public/Bug/Display.html?id=57673
+
 0.8   20 Jan 2010
     - Fixed playlist parsing to properly grab Smart Playlist information
         and all playlist metadata.
