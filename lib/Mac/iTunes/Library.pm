@@ -418,12 +418,8 @@ Mac::iTunes::Library::Item objects.
 
   # Assuming a previously created library
   %items = $library->items();
-  foreach my $artist (keys %items) {
-      my $artistSongs = $items{$artist};
-
-      foreach my $songName (keys %$artistSongs) {
-          my $artistSongItems = $artistSongs->{$songName};
-
+  while (($artist, $artistSongs) = each %items) {
+      while (($songName, artistSongItems) = each %$artistSongs) {
           foreach my $item (@$artistSongItems) {
               # Do something here to every item in the library
               print $song->name() . "\n";
@@ -534,8 +530,11 @@ Drew Stephens <drew@dinomite.net>, http://dinomite.net
 =head1 CONTRIBUTORS
 
 Mark Grimes <mgrimes@cpan.org>, http://www.peculiarities.com
+
 Scott Lawrence (http://linkedin.com/in/scottdlawrence)
+
 Garrett Scott <garrett@gothik.org>, (http://www.gothik.org)
+
 Mark Allen <mrallen1@yahoo.com>
 
 =head1 SOURCE REPOSITORY

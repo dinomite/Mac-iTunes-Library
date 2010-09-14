@@ -807,6 +807,7 @@ Drew Stephens <drew@dinomite.net>, http://dinomite.net
 =head1 CONTRIBUTORS
 
 Mark Allen <mrallen1@yahoo.com>
+
 Michael G Schwern <mschwern@cpan.org>
 
 =head1 SOURCE REPOSITORY
