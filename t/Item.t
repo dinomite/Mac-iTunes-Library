@@ -4,8 +4,6 @@
 =head1 SVN INFO
 
 $Revision$
-$Date$
-$Author$
 
 =cut
 

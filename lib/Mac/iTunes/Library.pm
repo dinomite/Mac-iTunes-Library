@@ -11,7 +11,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw() ] );
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw( );
 
-our $VERSION = '0.9';
+our $VERSION = '1.0';
 
 =head1 NAME
 
@@ -556,8 +556,6 @@ http://mac-itunes.googlecode.com
 =head1 SVN INFO
 
 $Revision$
-$Date$
-$Author$
 
 =head1 COPYRIGHT AND LICENSE
 
