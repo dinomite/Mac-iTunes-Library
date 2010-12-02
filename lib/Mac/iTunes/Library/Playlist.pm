@@ -348,7 +348,13 @@ Drew Stephens <drew@dinomite.net>, http://dinomite.net
 
 =head1 CONTRIBUTORS
 
-Mark Grimes <mgrimes@cpan.org>, http://www.peculiarities.com
+=over 4
+
+=item *
+
+Mark Grimes <mgrimes@cpan.org>, L<http://www.peculiarities.com>
+
+=back
 
 =head1 SOURCE REPOSITORY
 

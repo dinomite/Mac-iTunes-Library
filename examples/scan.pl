@@ -21,14 +21,14 @@ use Mac::iTunes::Library;
 use Mac::iTunes::Library::XML;
 use Mac::iTunes::Library::Item;
 
-my $usage = "iTunesStats.pl library.xml\n";
+my $usage = "Usage: scan.pl <library.xml>\n";
 
 die $usage if (scalar(@ARGV) != 1);
 my $file = $ARGV[0];
 
 # Make a new Library
-print "Loading '$library'...";
-my $library = Mac::iTunes::Library::XML->parse($library);
+print "Loading '$file'...";
+my $library = Mac::iTunes::Library::XML->parse($file);
 print " loaded " . $library->num() . " items.\n"; 
 
 # Get the hash of items

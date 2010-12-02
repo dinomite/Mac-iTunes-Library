@@ -110,10 +110,12 @@ sub new {
         'Date Modified' => undef,
         'Date Added' => undef,
         'Bit Rate' => undef,
+        'Comments' => undef,
         'Sample Rate' => undef,
         'Play Count' => undef,
         'Play Date' => undef,
         'Play Date UTC' => undef,
+        'Release Date' => undef,
         'Skip Count' => undef,
         'Skip Count UTC' => undef,
         'Rating' => undef,
@@ -122,6 +124,7 @@ sub new {
         'Compilation' => undef,
         'Persistent ID' => undef,
         'Track Type' => undef,
+        'iTunesU' => undef,
         'Location' => undef,
         'File Folder Count' => undef,
         'Library Folder Count' => undef,
@@ -150,10 +153,12 @@ sub new {
         elsif ($param eq 'Date Modified') { dateModified($self, $params{'Date Modified'}) }
         elsif ($param eq 'Date Added') { dateAdded($self, $params{'Date Added'}) }
         elsif ($param eq 'Bit Rate') { bitRate($self, $params{'Bit Rate'}) }
+        elsif ($param eq 'Comments') { comments($self, $params{'Comments'}) }
         elsif ($param eq 'Sample Rate') { sampleRate($self, $params{'Sample Rate'}) }
         elsif ($param eq 'Play Count') { playCount($self, $params{'Play Count'}) }
         elsif ($param eq 'Play Date') { playDate($self, $params{'Play Date'}) }
         elsif ($param eq 'Play Date UTC') { playDateUTC($self, $params{'Play Date UTC'}) }
+        elsif ($param eq 'Release Date') { releaseDate($self, $params{'Release Date'}) }
         elsif ($param eq 'Skip Count') { skipCount($self, $params{'Skip Count'}) }
         elsif ($param eq 'Skip Date') { skipDate($self, $params{'Skip Date'}) }
         elsif ($param eq 'Rating') { rating($self, $params{'Rating'}) }
@@ -162,6 +167,7 @@ sub new {
         elsif ($param eq 'Compilation') { compilation($self, $params{'Compilation'}) }
         elsif ($param eq 'Persistent ID') { persistentID($self, $params{'Persistent ID'}) }
         elsif ($param eq 'Track Type') { trackType($self, $params{'Track Type'}) }
+        elsif ($param eq 'iTunesU') { iTunesU($self, $params{'iTunesU'}) }        
         elsif ($param eq 'Location') { location($self, $params{'Location'}) }
         elsif ($param eq 'File Folder Count') { fileFolderCount($self, $params{'File Folder Count'}) }
         elsif ($param eq 'Library Folder Count') { libraryFolderCount($self, $params{'Library Folder Count'}) }
@@ -455,6 +461,24 @@ sub bitRate {
     return $self->{'Bit Rate'};
 } #bitRate
 
+=head2 comments( $comments )
+
+Get/set the Comments attribute for this item.
+
+=cut
+
+sub comments {
+    my $self = shift;
+
+    if (@_) {
+        my $comments = shift;
+        return carp "$comments isn't a valid Comments" unless ($comments =~ /.*/);
+        $self->{'Comments'} = $comments;
+    }
+
+    return $self->{'Comments'};
+} #comment
+
 =head2 sampleRate( $sampleRate )
 
 Get/set the Sample Rate attribute for this item.
@@ -530,6 +554,25 @@ sub playDateUTC {
 
     return $self->{'Play Date UTC'};
 } #playDateUTC
+
+=head2 releaseDate( $releaseDate )
+
+Get/set the Release Date attribute for this item.
+
+=cut
+
+sub releaseDate {
+    my $self = shift;
+
+    if (@_) {
+        my $releaseDate = shift;
+        return carp "$releaseDate isn't a valid Release Date"
+                unless _checkDate($releaseDate);
+        $self->{'Release Date'} = $releaseDate;
+    }
+
+    return $self->{'Release Date'};
+} #releaseDate
 
 =head2 skipCount( $skipCount )
 
@@ -679,6 +722,26 @@ sub trackType {
     return $self->{'Track Type'};
 } #trackType
 
+=head2 iTunesU( $trackType )
+
+Get/set the iTunesU attribute for this item.
+
+=cut
+
+sub iTunesU {
+    my $self = shift;
+
+    if (@_) {
+        my $iTunesU = shift;
+        return carp "$iTunesU isn't a valid iTunesU"
+                unless ($iTunesU =~ /(Y|N)/);
+        $self->{'iTunesU'} = $iTunesU;
+    }
+
+    return $self->{'iTunesU'};
+} #iTunesU
+
+
 =head2 location( $location )
 
 Get/set the Location attribute for this item.
@@ -806,9 +869,21 @@ Drew Stephens <drew@dinomite.net>, http://dinomite.net
 
 =head1 CONTRIBUTORS
 
+=over 4
+
+=item *
+
 Mark Allen <mrallen1@yahoo.com>
 
+=item *
+
 Michael G Schwern <mschwern@cpan.org>
+
+=item *
+
+David Rostcheck <davidr@thisisdavidr.net>
+
+=back
 
 =head1 SOURCE REPOSITORY
 

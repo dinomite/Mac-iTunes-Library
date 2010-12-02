@@ -529,13 +529,25 @@ Drew Stephens <drew@dinomite.net>, http://dinomite.net
 
 =head1 CONTRIBUTORS
 
-Mark Grimes <mgrimes@cpan.org>, http://www.peculiarities.com
+=over 4
 
-Scott Lawrence (http://linkedin.com/in/scottdlawrence)
+=item *
 
-Garrett Scott <garrett@gothik.org>, (http://www.gothik.org)
+Mark Grimes <mgrimes@cpan.org>, (L<http://www.peculiarities.com>)
+
+=item *
+
+Scott Lawrence (L<http://linkedin.com/in/scottdlawrence>)
+
+=item *
+
+Garrett Scott <garrett@gothik.org>, (L<http://www.gothik.org>)
+
+=item *
 
 Mark Allen <mrallen1@yahoo.com>
+
+=back
 
 =head1 SOURCE REPOSITORY
 

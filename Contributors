@@ -22,3 +22,6 @@ Steven Scholnick <steve@scholnick.net> (http://www.scholnick.net)
 Michael G Schwern <mschwern@cpan.org> (http://schwern.dreamhosters.com)
   - Added Track Count and Track Number to Item
     https://rt.cpan.org/Public/Bug/Display.html?id=57673
+
+David Rostcheck <davidr@thisisdavidr.net>
+  - iTunesU support in Item.pm
