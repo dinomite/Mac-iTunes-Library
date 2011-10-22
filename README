@@ -1,5 +1,5 @@
-Mac-iTunes version 0.8
-==========================
+Mac-iTunes version 1.0
+=======================
 
 A representation of an iTunes library.
 
@@ -18,17 +18,11 @@ To install this module type the following:
 
 SOURCE
 
-    http://mac-itunes.googlecode.com
+    http://github.com/dinomite/Mac-iTunes-Library
 
 DEPENDENCIES
 
     XML::Parser
-
-SVN INFO
-
-$Revision$
-$Date$
-$Author$
 
 COPYRIGHT AND LICENCE
 
