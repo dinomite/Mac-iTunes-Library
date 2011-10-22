@@ -1,8 +1,8 @@
-# $Revision$
-# $Date$
-# $Author$
-
 Revision history for Perl extension Mac::iTunes::Library
+
+1.0   02 Dec 2010
+    - Add support for iTunesU in Item
+        Patch submitted by David Rostcheck.
 
 0.9   30 May 2010
     - Integrated patch for trackCount and trackNumber provided by
